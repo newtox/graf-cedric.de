@@ -1,0 +1,35 @@
+# .gitignore for Laravel
+/public/storage
+/storage/*.key
+/vendor
+/node_modules
+/.vscode
+/.env
+Homestead.yaml
+Homestead.json
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+# IDE and OS files
+.DS_Store
+Thumbs.db
+.idea
+*.sublime-project
+*.sublime-workspace
+.vagrant
+/.phpunit.result.cache
+/.phpunit.result.cache.json
+# Logs
+*.log
+/storage/logs/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/storage/app/public/*
+/storage/debugbar/*
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
