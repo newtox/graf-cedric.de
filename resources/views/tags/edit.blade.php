@@ -35,6 +35,11 @@
                     <option value="bg-purple-900" {{ $tag->color == 'bg-purple-900' ? 'selected' : '' }}>Dark Purple</option>
                     <option value="bg-indigo-600" {{ $tag->color == 'bg-indigo-600' ? 'selected' : '' }}>Indigo</option>
                     <option value="bg-pink-600" {{ $tag->color == 'bg-indigo-600' ? 'selected' : '' }}>Pink</option>
+                    <option value="bg-emerald-600" {{ $tag->color == 'bg-indigo-600' ? 'selected' : '' }}>Emerald</option>
+                    <option value="bg-violet-900" {{ $tag->color == 'bg-indigo-600' ? 'selected' : '' }}>Dark Violet</option>
+                    <option value="bg-yellow-600" {{ $tag->color == 'bg-indigo-600' ? 'selected' : '' }}>Dark Yellow</option>
+                    <option value="bg-zinc-500" {{ $tag->color == 'bg-indigo-600' ? 'selected' : '' }}>Zinc</option>
+                    <option value="bg-sky-400" {{ $tag->color == 'bg-indigo-600' ? 'selected' : '' }}>Sky</option>
                 </select>
             </div>
 

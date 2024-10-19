@@ -34,6 +34,11 @@
                     <option value="bg-purple-900">Dark Purple</option>
                     <option value="bg-indigo-600">Indigo</option>
                     <option value="bg-pink-600">Pink</option>
+                    <option value="bg-emerald-600">Emerald</option>
+                    <option value="bg-violet-900">Dark Violet</option>
+                    <option value="bg-yellow-600">Dark Yellow</option>
+                    <option value="bg-zinc-500">Zinc</option>
+                    <option value="bg-sky-400">Sky</option>
                 </select>
             </div>
 
