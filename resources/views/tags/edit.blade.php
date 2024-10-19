@@ -16,14 +16,25 @@
             <div class="mb-3">
                 <label for="color" class="form-label text-gray-300">Badge Color</label>
                 <select class="form-select bg-gray-700 text-white border border-gray-600 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50" name="color" id="color" required>
+                    <option value="bg-red-500" {{ $tag->color == 'bg-red-500' ? 'selected' : '' }}>Light Red</option>
                     <option value="bg-red-600" {{ $tag->color == 'bg-red-600' ? 'selected' : '' }}>Red</option>
+                    <option value="bg-red-800" {{ $tag->color == 'bg-red-800' ? 'selected' : '' }}>Dark Red</option>
+                    <option value="bg-green-400" {{ $tag->color == 'bg-green-400' ? 'selected' : '' }}>Light Green</option>
                     <option value="bg-green-600" {{ $tag->color == 'bg-green-600' ? 'selected' : '' }}>Green</option>
+                    <option value="bg-green-800" {{ $tag->color == 'bg-green-800' ? 'selected' : '' }}>Dark Green</option>
+                    <option value="bg-blue-500" {{ $tag->color == 'bg-blue-500' ? 'selected' : '' }}>Light Blue</option>
                     <option value="bg-blue-600" {{ $tag->color == 'bg-blue-600' ? 'selected' : '' }}>Blue</option>
+                    <option value="bg-blue-800" {{ $tag->color == 'bg-blue-800' ? 'selected' : '' }}>Dark Blue</option>
+                    <option value="bg-yellow-300" {{ $tag->color == 'bg-yellow-300' ? 'selected' : '' }}>Light Yellow</option>
                     <option value="bg-yellow-500" {{ $tag->color == 'bg-yellow-500' ? 'selected' : '' }}>Yellow</option>
+                    <option value="bg-gray-400" {{ $tag->color == 'bg-gray-400' ? 'selected' : '' }}>Light Grey</option>
                     <option value="bg-gray-500" {{ $tag->color == 'bg-gray-500' ? 'selected' : '' }}>Grey</option>
+                    <option value="bg-gray-700" {{ $tag->color == 'bg-gray-700' ? 'selected' : '' }}>Dark Grey</option>
+                    <option value="bg-purple-400" {{ $tag->color == 'bg-purple-400' ? 'selected' : '' }}>Light Purple</option>
                     <option value="bg-purple-600" {{ $tag->color == 'bg-purple-600' ? 'selected' : '' }}>Purple</option>
+                    <option value="bg-purple-900" {{ $tag->color == 'bg-purple-900' ? 'selected' : '' }}>Dark Purple</option>
                     <option value="bg-indigo-600" {{ $tag->color == 'bg-indigo-600' ? 'selected' : '' }}>Indigo</option>
-                    <option value="bg-pink-600" {{ $tag->color == 'bg-pink-600' ? 'selected' : '' }}>Pink</option>
+                    <option value="bg-pink-600" {{ $tag->color == 'bg-indigo-600' ? 'selected' : '' }}>Pink</option>
                 </select>
             </div>
 

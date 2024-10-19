@@ -20,14 +20,30 @@
                         @php
                             // Mapping Tailwind CSS color classes to normal names
                             $colorNames = [
+                                'bg-red-500' => 'Light Red',
                                 'bg-red-600' => 'Red',
+                                'bg-red-800' => 'Dark Red',
+                                'bg-green-400' => 'Light Green',
                                 'bg-green-600' => 'Green',
+                                'bg-green-800' => 'Dark Green',
+                                'bg-blue-500' => 'Light Blue',
                                 'bg-blue-600' => 'Blue',
+                                'bg-blue-800' => 'Dark Blue',
+                                'bg-yellow-300' => 'Light Yellow',
                                 'bg-yellow-500' => 'Yellow',
-                                'bg-gray-500' => 'Gray',
+                                'bg-gray-400' => 'Light Grey',
+                                'bg-gray-500' => 'Grey',
+                                'bg-gray-700' => 'Dark Grey',
+                                'bg-purple-400' => 'Light Purple',
                                 'bg-purple-600' => 'Purple',
+                                'bg-purple-900' => 'Dark Purple',
                                 'bg-indigo-600' => 'Indigo',
                                 'bg-pink-600' => 'Pink',
+                                'bg-emerald-600' => 'Emerald',
+                                'bg-violet-900' => 'Dark Violet',
+                                'bg-yellow-600' => 'Dark Yellow',
+                                'bg-zinc-500' => 'Zinc',
+                                'bg-sky-400' => 'Sky'
                             ];
                             $colorName = $colorNames[$tag->color] ?? 'Unknown';
                         @endphp
