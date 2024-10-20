@@ -13,11 +13,11 @@ class GameController extends Controller
         // Get all tags from the database
         $tags = Tag::all();
 
-        // Initialize the query for games
-        $query = Game::query();
+        // Initialize the query for games without calling get()
+        $query = Game::query()->orderBy('name', 'ASC');
 
         // Handle search query
-        if ($request->has('search') && $request->search != '') {
+        if ($request->has('search') && !empty($request->search)) {
             $query->where('name', 'like', '%' . $request->search . '%');
         }
 
@@ -28,7 +28,7 @@ class GameController extends Controller
             });
         }
 
-        // Paginate results
+        // Paginate results after building the query
         $games = $query->paginate(10);
 
         // Return view with games and tags
