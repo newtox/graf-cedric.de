@@ -62,10 +62,15 @@
                 </div>
                 <div id="tagList" class="mt-2 space-y-2 max-h-60 overflow-y-auto p-2 bg-gray-700 rounded-md border border-gray-600">
                     @foreach($tags as $tag)
-                        <label class="flex items-center">
-                            <input type="checkbox" name="tags[]" value="{{ $tag->id }}" class="mr-2 text-blue-600 border-gray-300 rounded focus:ring-blue-500" />
-                            <span class="text-gray-300">{{ ucfirst($tag->name) }}</span>
-                        </label>
+                        <div class="flex items-center">
+                            <input type="checkbox" name="tags[]" value="{{ $tag->id }}" id="tag-{{ $tag->id }}"
+                                   class="hidden" onclick="toggleTag(this, '{{ $tag->color }}')">
+                            <label for="tag-{{ $tag->id }}"
+                                   class="flex items-center justify-center h-10 px-4 rounded-md border border-gray-600 text-gray-200
+                                   transition-colors duration-200 cursor-pointer bg-gray-800">
+                                {{ ucfirst($tag->name) }}
+                            </label>
+                        </div>
                     @endforeach
                 </div>
             </div>
@@ -77,6 +82,17 @@
     </div>
 
     <script>
+        function toggleTag(checkbox, color) {
+            const label = document.querySelector(`label[for='${checkbox.id}']`);
+            if (checkbox.checked) {
+                label.classList.add(color); // Change background to tag color
+                label.classList.remove('bg-gray-800'); // Remove default color
+            } else {
+                label.classList.remove(color); // Reset color
+                label.classList.add('bg-gray-800'); // Revert to default
+            }
+        }
+
         function filterTags() {
             const input = document.getElementById('tagSearch');
             const filter = input.value.toLowerCase();
@@ -86,9 +102,9 @@
             for (let i = 0; i < tags.length; i++) {
                 const tagText = tags[i].innerText.toLowerCase();
                 if (tagText.includes(filter)) {
-                    tags[i].style.display = '';
+                    tags[i].parentElement.style.display = ''; // Show the parent element (the div)
                 } else {
-                    tags[i].style.display = 'none';
+                    tags[i].parentElement.style.display = 'none'; // Hide the parent element (the div)
                 }
             }
         }
