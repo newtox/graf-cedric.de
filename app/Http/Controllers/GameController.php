@@ -86,6 +86,9 @@ class GameController extends Controller
 
     public function show(Game $game)
     {
+        $game->load(['tags' => function ($query) {
+            $query->orderBy('name', 'ASC');
+        }]);
         return view('games.show', compact('game'));
     }
 
