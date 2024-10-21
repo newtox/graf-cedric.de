@@ -48,8 +48,8 @@ class GameController extends Controller
             'thumbnail_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'publisher_name' => 'required',
             'developer_name' => 'required',
-            'publisher_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'developer_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'publisher_image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'developer_image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'tags' => 'nullable|array',
             'tags.*' => 'exists:tags,id',
         ]);
