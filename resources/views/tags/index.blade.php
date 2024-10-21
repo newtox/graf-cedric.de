@@ -9,7 +9,7 @@
             <tr>
                 <th class="px-4 py-2 text-left text-sm font-medium text-gray-300">Name</th>
                 <th class="px-4 py-2 text-left text-sm font-medium text-gray-300">Color</th>
-                <th class="px-4 py-2 text-left text-sm font-medium text-gray-300">Actions</th>
+                <th class="px-4 py-2 text-right text-sm font-medium text-gray-300">Actions</th>
             </tr>
             </thead>
             <tbody class="bg-gray-800 divide-y divide-gray-600">
@@ -51,7 +51,7 @@
                                 {{ $colorName }}
                             </span>
                     </td>
-                    <td class="px-4 py-2 text-sm flex space-x-2">
+                    <td class="px-4 py-2 text-sm text-right flex justify-end space-x-2">
                         <a href="{{ route('tags.edit', $tag->id) }}" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-2 rounded text-xs">Edit</a>
                         <form action="{{ route('tags.destroy', $tag->id) }}" method="POST" class="inline-block">
                             @csrf
