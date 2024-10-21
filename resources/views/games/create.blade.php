@@ -25,7 +25,7 @@
 
             <div class="mb-4">
                 <label for="thumbnail_image" class="block text-sm font-medium text-gray-300">Thumbnail Image</label>
-                <input type="file" name="thumbnail_image" id="thumbnail_image" required
+                <input type="file" name="thumbnail_image" id="thumbnail_image"
                        class="mt-1 block w-full p-2 rounded-md border border-gray-600 bg-gray-800 text-white" />
             </div>
 
@@ -43,13 +43,13 @@
 
             <div class="mb-4">
                 <label for="publisher_image" class="block text-sm font-medium text-gray-300">Publisher Image</label>
-                <input type="file" name="publisher_image" id="publisher_image" required
+                <input type="file" name="publisher_image" id="publisher_image"
                        class="mt-1 block w-full p-2 rounded-md border border-gray-600 bg-gray-800 text-white" />
             </div>
 
             <div class="mb-4">
                 <label for="developer_image" class="block text-sm font-medium text-gray-300">Developer Image</label>
-                <input type="file" name="developer_image" id="developer_image" required
+                <input type="file" name="developer_image" id="developer_image"
                        class="mt-1 block w-full p-2 rounded-md border border-gray-600 bg-gray-800 text-white" />
             </div>
 
