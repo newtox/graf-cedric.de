@@ -17,7 +17,7 @@
                 <button id="tag-filter-toggle" class="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg">
                     Filter by Tags
                 </button>
-                <div id="tag-filter-options" class="hidden mt-2 bg-gray-700 rounded-lg shadow-lg p-4 absolute z-10">
+                <div id="tag-filter-options" class="hidden mt-2 bg-gray-700 rounded-lg shadow-lg p-4 absolute z-50">
                     <form action="{{ route('games.index') }}" method="GET" class="space-y-2">
                         @foreach($tags as $tag)
                             <div class="flex items-center">
@@ -68,33 +68,37 @@
                         <td class="px-4 py-2 text-sm text-right flex justify-end space-x-2">
                             <!-- Desktop Action Buttons (Hidden on mobile) -->
                             <div class="hidden sm:flex space-x-2">
-                                <a href="{{ route('games.edit', $game->id) }}" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-2 rounded text-xs">Edit</a>
-                                <form action="{{ route('games.destroy', $game->id) }}" method="POST" class="inline-block">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded text-xs">Delete</button>
-                                </form>
+                                @auth
+                                    <a href="{{ route('games.edit', $game->id) }}" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-2 rounded text-xs">Edit</a>
+                                    <form action="{{ route('games.destroy', $game->id) }}" method="POST" class="inline-block">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded text-xs">Delete</button>
+                                    </form>
+                                @endauth
                                 <a href="{{ route('games.show', $game->id) }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded text-xs">Info</a>
                             </div>
 
-                            <!-- Mobile Dropdown Menu (Styled with colored items) -->
+                            <!-- Mobile Dropdown Menu -->
                             <div x-data="{ open: false }" class="relative sm:hidden">
-                                <button @click="open = !open" class="inline-flex justify-center px-4 py-2 text-sm font-medium text-gray-300 bg-gray-700 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-gray-500 rounded-md">
+                                <button @click="open = !open" class="inline-flex justify-center items-center px-4 py-2 text-sm font-medium text-gray-300 bg-gray-700 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-gray-500 rounded-md">
                                     Actions
                                     <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                         <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                                     </svg>
                                 </button>
 
-                                <div x-show="open" @click.away="open = false" class="absolute right-0 mt-2 w-44 rounded-md shadow-lg z-50 bg-gray-700 ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                <div x-show="open" @click.away="open = false" class="absolute right-0 mt-2 w-40 rounded-md shadow-lg z-50 bg-gray-700 ring-1 ring-black ring-opacity-5 focus:outline-none">
                                     <div class="py-1" role="none">
-                                        <a href="{{ route('games.edit', $game->id) }}" class="block rounded px-3 py-1 text-sm text-white bg-yellow-500 hover:bg-yellow-600">Edit</a>
-                                        <form action="{{ route('games.destroy', $game->id) }}" method="POST" class="block">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="rounded w-full text-left px-3 py-1 text-white bg-red-500 hover:bg-red-600">Delete</button>
-                                        </form>
-                                        <a href="{{ route('games.show', $game->id) }}" class="block rounded px-3 py-1 text-white bg-blue-500 hover:bg-blue-600">Info</a>
+                                        @auth
+                                            <a href="{{ route('games.edit', $game->id) }}" class="block rounded text-left px-3 py-1 text-sm text-white bg-yellow-500 hover:bg-yellow-600">Edit</a>
+                                            <form action="{{ route('games.destroy', $game->id) }}" method="POST" class="block">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="rounded w-full text-left px-3 py-1 text-white bg-red-500 hover:bg-red-600">Delete</button>
+                                            </form>
+                                        @endauth
+                                        <a href="{{ route('games.show', $game->id) }}" class="block rounded text-left px-3 py-1 text-white bg-blue-500 hover:bg-blue-600">Info</a>
                                     </div>
                                 </div>
                             </div>
@@ -103,6 +107,22 @@
                 @endforeach
                 </tbody>
             </table>
+        </div>
+
+        <div class="flex flex-col sm:flex-row justify-end space-x-2 mt-4">
+            @foreach($games as $game)
+                <div class="sm:hidden flex flex-col mb-2">
+                    @auth
+                        <a href="{{ route('games.edit', $game->id) }}" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-2 rounded text-xs">Edit</a>
+                        <form action="{{ route('games.destroy', $game->id) }}" method="POST" class="inline-block">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded text-xs">Delete</button>
+                        </form>
+                    @endauth
+                    <a href="{{ route('games.show', $game->id) }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded text-xs">Info</a>
+                </div>
+            @endforeach
         </div>
 
         <div class="py-4">
