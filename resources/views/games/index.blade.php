@@ -20,7 +20,7 @@
                 <div id="tag-filter-options" class="hidden mt-2 bg-gray-700 rounded-lg shadow-lg p-4 absolute z-50">
                     <form action="{{ route('games.index') }}" method="GET" class="space-y-2">
                         @foreach($tags as $tag)
-                            <div class="flex items-center">
+                            <div class="flex items-center whitespace-nowrap">
                                 <input type="checkbox" name="tags[]" value="{{ $tag->id }}" id="tag-{{ $tag->id }}"
                                        class="hidden" data-color="{{ $tag->color }}"
                                     {{ request()->input('tags') && in_array($tag->id, request()->input('tags')) ? 'checked' : '' }}>
