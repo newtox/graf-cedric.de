@@ -6,20 +6,20 @@
 
         <!-- Row for Thumbnail Image -->
         <div class="flex justify-center mb-4">
-            <img src="{{ asset('storage/' . $game->thumbnail_image_path) }}" alt="Thumbnail" class="h-60 object-contain rounded-lg"> <!-- Adjusted height -->
+            <img src="{{ asset('storage/' . $game->thumbnail_image_path) }}" alt="" class="h-60 object-contain rounded-lg"> <!-- Adjusted height -->
         </div>
 
         <!-- Row for Publisher and Developer Images -->
         <div class="flex justify-around mb-4">
             <!-- Publisher Image -->
             <div class="flex flex-col items-center">
-                <img src="{{ asset('storage/' . $game->publisher_image_path) }}" alt="Publisher Image" class="h-32 w-32 object-contain rounded-lg mb-2"> <!-- Adjusted height -->
+                <img src="{{ asset('storage/' . $game->publisher_image_path) }}" alt="" class="h-32 w-32 object-contain rounded-lg mb-2"> <!-- Adjusted height -->
                 <p class="text-gray-300 text-center"><strong>Publisher:</strong> {{ $game->publisher_name }}</p>
             </div>
 
             <!-- Developer Image -->
             <div class="flex flex-col items-center">
-                <img src="{{ asset('storage/' . $game->developer_image_path) }}" alt="Developer Image" class="h-32 w-32 object-contain rounded-lg mb-2"> <!-- Adjusted height -->
+                <img src="{{ asset('storage/' . $game->developer_image_path) }}" alt="" class="h-32 w-32 object-contain rounded-lg mb-2"> <!-- Adjusted height -->
                 <p class="text-gray-300 text-center"><strong>Developer:</strong> {{ $game->developer_name }}</p>
             </div>
         </div>

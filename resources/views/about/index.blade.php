@@ -3,7 +3,7 @@
 @section('content')
     <div class="container mx-auto my-8 p-4 bg-gray-800 shadow-md rounded-lg max-w-lg">
         <h1 class="text-2xl font-bold text-white text-center mb-4">About Me</h1>
-        <img src="{{ asset('storage/images/Profile.png') }}" alt="About Me" class="w-full h-auto rounded-lg shadow-lg mb-4 md:max-w-md lg:max-w-lg"> <!-- Full width on mobile, limited size on larger screens -->
+        <img src="{{ asset('storage/images/Profile.png') }}" alt="" class="w-full h-auto rounded-lg shadow-lg mb-4 md:max-w-md lg:max-w-lg"> <!-- Full width on mobile, limited size on larger screens -->
         <div class="text-gray-300">
             <p class="mb-4">
                 Hi, I'm Graf Cedric and I have been active as a beta tester for various companies and games since 2009.
