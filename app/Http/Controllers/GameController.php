@@ -54,12 +54,20 @@ class GameController extends Controller
             'tags.*' => 'exists:tags,id',
         ]);
 
-        // Store images
+        // Store the required thumbnail image
         $thumbnailPath = $request->file('thumbnail_image')->store('images/thumbnails', 'public');
-        $publisherImagePath = $request->file('publisher_image')->store('images/publishers', 'public');
-        $developerImagePath = $request->file('developer_image')->store('images/developers', 'public');
 
-        // Create the game
+        // Store publisher image if uploaded, or set it to null
+        $publisherImagePath = $request->hasFile('publisher_image')
+            ? $request->file('publisher_image')->store('images/publishers', 'public')
+            : null;
+
+        // Store developer image if uploaded, or set it to null
+        $developerImagePath = $request->hasFile('developer_image')
+            ? $request->file('developer_image')->store('images/developers', 'public')
+            : null;
+
+        // Create the game instance
         $game = Game::create([
             'name' => $request->name,
             'description' => $request->description,
@@ -70,7 +78,6 @@ class GameController extends Controller
             'developer_image_path' => $developerImagePath,
         ]);
 
-        // Attach tags
         if ($request->tags) {
             $game->tags()->attach($request->tags);
         }
