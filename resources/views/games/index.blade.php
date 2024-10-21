@@ -47,7 +47,7 @@
                 <tr>
                     <td class="px-4 py-2 text-sm text-gray-200">{{ $game->name }}</td>
                     <td class="px-4 py-2 text-sm text-gray-200">
-                        @foreach($game->tags as $tag)
+                        @foreach($game->tags->sortBy('name') as $tag)
                             <span class="inline-block text-white text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full {{ $tag->color }}">{{ ucfirst($tag->name) }}</span>
                         @endforeach
                     </td>
