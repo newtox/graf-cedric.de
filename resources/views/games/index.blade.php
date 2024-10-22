@@ -109,22 +109,6 @@
             </table>
         </div>
 
-        <div class="flex flex-col sm:flex-row justify-end space-x-2 mt-4">
-            @foreach($games as $game)
-                <div class="sm:hidden flex flex-col mb-2">
-                    @auth
-                        <a href="{{ route('games.edit', $game->id) }}" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-2 rounded text-xs">Edit</a>
-                        <form action="{{ route('games.destroy', $game->id) }}" method="POST" class="inline-block">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded text-xs">Delete</button>
-                        </form>
-                    @endauth
-                    <a href="{{ route('games.show', $game->id) }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded text-xs">Info</a>
-                </div>
-            @endforeach
-        </div>
-
         <div class="py-4">
             {{ $games->links('vendor.pagination.tailwind') }}
         </div>
