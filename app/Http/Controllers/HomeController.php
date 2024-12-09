@@ -16,7 +16,17 @@ class HomeController extends Controller
             'total_tags' => Tag::count(),
             'total_users' => User::count(),
             'latest_games' => Game::with('tags')->latest()->take(5)->get(),
-            'games_by_tag' => Tag::withCount('games')->get()
+            'games_by_tag' => Tag::withCount('games')->orderByRaw("
+                CASE
+                    WHEN name LIKE 'Alpha%' THEN 1
+                    WHEN name LIKE 'Beta%' THEN 2
+                    WHEN name LIKE 'Games%' THEN 3
+                    WHEN name LIKE 'Hardware%' THEN 4
+                    WHEN name LIKE 'Software%' THEN 5
+                    ELSE 6
+                END,
+                name ASC
+            ")->get()
         ];
 
         return view('home', compact('stats'));

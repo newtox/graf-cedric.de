@@ -19,7 +19,17 @@ class Tag extends Model
     {
         parent::boot();
         static::addGlobalScope('ordered', function ($query) {
-            $query->orderBy('name');
+            $query->orderByRaw("
+            CASE
+                WHEN name LIKE 'Alpha%' THEN 1
+                WHEN name LIKE 'Beta%' THEN 2
+                WHEN name LIKE 'Games%' THEN 3
+                WHEN name LIKE 'Hardware%' THEN 4
+                WHEN name LIKE 'Software%' THEN 5
+                ELSE 6
+            END,
+            name ASC
+            ");
         });
     }
 

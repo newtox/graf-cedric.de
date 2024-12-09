@@ -14,7 +14,7 @@ class GameController extends Controller
         $query = Game::with('tags');
 
         if ($request->has('search')) {
-            $query->where(function($q) use ($request) {
+            $query->where(function ($q) use ($request) {
                 $q->where('games.title', 'like', '%' . $request->search . '%')
                     ->orWhere('games.developer_name', 'like', '%' . $request->search . '%');
             });
@@ -22,12 +22,22 @@ class GameController extends Controller
 
         if ($request->has('tags')) {
             $query->whereHas('tags', function ($q) use ($request) {
-                $q->whereIn('tags.id', (array) $request->tags);
+                $q->whereIn('tags.id', (array)$request->tags);
             });
         }
 
         $games = $query->paginate(12)->withQueryString();
-        $tags = Tag::orderBy('name')->get();
+        $tags = Tag::orderByRaw("
+        CASE
+            WHEN name LIKE 'Alpha%' THEN 1
+            WHEN name LIKE 'Beta%' THEN 2
+            WHEN name LIKE 'Games%' THEN 3
+            WHEN name LIKE 'Hardware%' THEN 4
+            WHEN name LIKE 'Software%' THEN 5
+            ELSE 6
+        END,
+        name ASC
+        ");
 
         if ($request->ajax()) {
             return view('games.partials.game-cards', compact('games'));
