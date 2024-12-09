@@ -37,7 +37,7 @@ class GameController extends Controller
             ELSE 6
         END,
         name ASC
-        ");
+        ")->get();
 
         if ($request->ajax()) {
             return view('games.partials.game-cards', compact('games'));
