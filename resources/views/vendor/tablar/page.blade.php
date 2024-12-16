@@ -1,5 +1,11 @@
 @extends('tablar::master')
 
+@section('tablar_css')
+    <link rel="icon" type="image/png" href="{{ asset('storage/images/Profile.png') }}">
+    @stack('css')
+    @yield('css')
+@stop
+
 @inject('layoutHelper', 'TakiElias\Tablar\Helpers\LayoutHelper')
 
 @section('tablar_css')
