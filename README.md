@@ -30,15 +30,16 @@ Welcome to the **Graf-Cedric.de** repository! This is a Laravel-based web applic
 ### Installation
 
 1. **Clone this repository**:
-   
-   git clone [repository-url]
-   cd cedric-beta
-   
+   ```bash
+   git clone https://github.com/newtox/graf-cedric.de.git
+   cd graf-cedric.de
+   ```
 
 2. **Setup**:
-   - Create environment file:
-     
-     cp .env.example .env
+   - Create a `.env` file based on the provided `.env.example`. Copy the content from:
+     ```plaintext
+     .env.example
+     ```
      
    - Configure your database and application settings in `.env`
 
@@ -62,7 +63,7 @@ Welcome to the **Graf-Cedric.de** repository! This is a Laravel-based web applic
 - **Laravel Framework**: ^10.0
 - **Laravel Sanctum**: ^3.2
 - **Spatie Laravel Permission**: ^6.10
-- **Tablar**: 10.0 (Admin UI)
+- **Tablar**: 10.0 (UI)
 
 #### Frontend (package.json):
 - **@tabler/core**: ^1.0.0-beta20
@@ -70,11 +71,16 @@ Welcome to the **Graf-Cedric.de** repository! This is a Laravel-based web applic
 - **Bootstrap**: 5.3.1
 - **jQuery**: 3.7.*
 - **Sass**: ~1.64.2
-- **Vite**: ^4.0.0
+- **Vite**: ^4.0.0y
+
+### Usage
+
+- Access the application at http://127.0.0.1:8000/login
+- Login using the provided credentials (admin@example.com, password)
 
 ## Contributing
 
-Want to improve Cedric Beta? Here's how:
+Want to improve Graf Cedric's Website? Here's how:
 
 1. **Fork** the repository
 2. **Create** a feature branch: `git checkout -b feature/your-feature`
@@ -94,4 +100,4 @@ By contributing, you agree that your contributions will be licensed under the sa
 
 Have questions or found a bug?
 - Open an issue on GitHub
-- Or reach out to me at contact@placeholder.de
+- Or reach out to me at [contact@placeholder.de](mailto:contact@placeholder.de)
