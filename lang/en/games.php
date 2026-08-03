@@ -12,7 +12,9 @@ return [
         'publisher_name' => 'Publisher',
         'publisher_image' => 'Publisher Image',
         'thumbnail' => 'Thumbnail',
-        'tags' => 'Tags'
+        'search' => 'Search for game titles or developer... press \'Enter\' to search',
+        'tags' => 'Tags',
+        'filter' => 'Apply filters'
     ],
     'messages' => [
         'created' => 'Game created successfully',

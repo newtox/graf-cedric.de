@@ -12,7 +12,9 @@ return [
         'publisher_name' => 'Publisher',
         'publisher_image' => 'Publisher Bild',
         'thumbnail' => 'Vorschaubild',
-        'tags' => 'Tags'
+        'search' => 'Nach Spiel oder Entwickler suchen... drücke \'Enter\' zum suchen',
+        'tags' => 'Tags',
+        'filter' => 'Filter anwenden'
     ],
     'messages' => [
         'created' => 'Spiel erfolgreich erstellt',

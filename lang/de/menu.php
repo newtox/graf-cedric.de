@@ -1,6 +1,6 @@
 <?php
 return [
-    'dashboard' => 'Dashboard',
+    'dashboard' => 'Startseite',
     'about' => 'Über mich',
     'public_games' => 'Spiele',
     'games_management' => 'Spieleverwaltung',

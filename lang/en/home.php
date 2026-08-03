@@ -1,9 +1,9 @@
 <?php
 return [
-    'dashboard' => 'Dashboard',
+    'dashboard' => 'Homepage',
     'total_games' => 'Total Games',
     'total_tags' => 'Total Tags',
-    'total_users' => 'Total Users',
+    'total_commits' => 'Total Updates',
     'games_by_tag' => 'Games by Tag',
     'latest_games' => 'Latest Games',
     'title' => 'Title',
