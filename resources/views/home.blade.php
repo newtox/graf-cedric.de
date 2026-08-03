@@ -44,7 +44,7 @@
                                 <i class="ti ti-git-commit text-muted me-2"></i>
                                 <div class="subheader">{{ __('home.total_commits') }}</div>
                             </div>
-                            <div class="h1 mb-3">{{ trim(shell_exec('git rev-list --count HEAD')) ?: 0 }}</div>
+                            <div class="h1 mb-3">{{ $stats['total_commits'] }}</div>
                         </div>
                     </div>
                 </div>

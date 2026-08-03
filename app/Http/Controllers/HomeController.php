@@ -11,9 +11,20 @@ class HomeController extends Controller
 {
     public function index(): View
     {
+        $commitCount = 0;
+        try {
+            $output = shell_exec('git rev-list --count HEAD 2>&1');
+            if ($output && is_numeric(trim($output))) {
+                $commitCount = (int) trim($output);
+            }
+        } catch (\Throwable $e) {
+            
+        }
+
         $stats = [
             'total_games' => Game::count(),
             'total_tags' => Tag::count(),
+            'total_commits' => $commitCount,
             'latest_games' => Game::with('tags')->latest()->take(5)->get(),
             'games_by_tag' => Tag::withCount('games')->orderByRaw("
                 CASE
