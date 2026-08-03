@@ -5,11 +5,11 @@
                 <ul class="list-inline list-inline-dots mb-0">
                     <li class="list-inline-item">
                         Copyright &copy; {{ now()->year }}
-                        <a class="link-secondary">{{config('tablar.bottom_title', 'TabLar')}}</a>.
+                        <a class="link-secondary" href="https://newtox.de">{{config('tablar.bottom_title', 'TabLar')}}</a>.
                         All rights reserved.
                     </li>
                     <li class="list-inline-item">
-                        <a class="link-secondary" rel="noopener">
+                        <a class="link-secondary" href="https://github.com/newtox/graf-cedric.de">
                             {{config('tablar.current_version', '1.0')}}
                         </a>
                     </li>
