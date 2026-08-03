@@ -14,7 +14,7 @@ class HomeController extends Controller
         $commitCount = 0;
         try {
             $output = shell_exec('git rev-list --count HEAD 2>&1');
-            return 'DEBUG OUTPUT: ' . var_export($output, true);
+            throw new \Exception('SHELL OUTPUT: ' . var_export($output, true));
             /*
             if ($output && is_numeric(trim($output))) {
                 $commitCount = (int) trim($output);
