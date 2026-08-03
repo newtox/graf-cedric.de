@@ -14,7 +14,6 @@ class HomeController extends Controller
         $stats = [
             'total_games' => Game::count(),
             'total_tags' => Tag::count(),
-            'total_users' => User::count(),
             'latest_games' => Game::with('tags')->latest()->take(5)->get(),
             'games_by_tag' => Tag::withCount('games')->orderByRaw("
                 CASE

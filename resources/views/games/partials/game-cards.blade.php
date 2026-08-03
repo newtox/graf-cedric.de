@@ -1,6 +1,6 @@
 @foreach($games as $game)
     <div class="col-sm-6 col-lg-4">
-        <a href="{{ route('games.show', $game) }}" class="card card-sm">
+        <a href="{{ route('games.show', $game) }}" class="card card-sm text-reset">
             <div class="card-img-top img-responsive img-responsive-16x9"
                  style="background-image: url('{{ $game->thumbnail }}');
                  background-size: contain;

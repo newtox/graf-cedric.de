@@ -13,12 +13,15 @@
                     <form action="{{ route('games.index') }}" method="GET" class="d-flex gap-2">
                         <div class="input-icon">
                             <span class="input-icon-addon">
-                                <i class="ti ti-search text-azure"></i>
+                                <i class="ti ti-search text-muted"></i>
                             </span>
                             <input type="text"
                                    class="form-control"
                                    name="search"
-                                   value="{{ request('search') }}">
+                                   value="{{ request('search') }}"
+                                   data-bs-toggle="tooltip"
+                                   data-bs-placement="top"
+                                   title="{{ __('games.fields.search') }}">
                         </div>
                         <div class="dropdown">
                             <button class="btn dropdown-toggle"
@@ -40,8 +43,8 @@
                                     </label>
                                 @endforeach
                                 <div class="dropdown-divider"></div>
-                                <button type="submit" class="dropdown-item rounded-2">
-                                    Filter
+                                <button type="submit" class="dropdown-item rounded-2 text-reset">
+                                    {{ __('games.fields.filter') }}
                                 </button>
                             </div>
                         </div>

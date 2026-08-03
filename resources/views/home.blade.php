@@ -19,7 +19,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
-                                <i class="ti ti-device-gamepad-3 text-red me-2"></i>
+                                <i class="ti ti-device-gamepad-3 text-muted me-2"></i>
                                 <div class="subheader">{{ __('home.total_games') }}</div>
                             </div>
                             <div class="h1 mb-3">{{ $stats['total_games'] }}</div>
@@ -30,7 +30,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
-                                <i class="ti ti-tag text-yellow me-2"></i>
+                                <i class="ti ti-tag text-muted me-2"></i>
                                 <div class="subheader">{{ __('home.total_tags') }}</div>
                             </div>
                             <div class="h1 mb-3">{{ $stats['total_tags'] }}</div>
@@ -41,10 +41,10 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
-                                <i class="ti ti-user text-green me-2"></i>
-                                <div class="subheader">{{ __('home.total_users') }}</div>
+                                <i class="ti ti-git-commit text-muted me-2"></i>
+                                <div class="subheader">{{ __('home.total_commits') }}</div>
                             </div>
-                            <div class="h1 mb-3">{{ $stats['total_users'] }}</div>
+                            <div class="h1 mb-3">{{ trim(shell_exec('git rev-list --count HEAD')) ?: 0 }}</div>
                         </div>
                     </div>
                 </div>
