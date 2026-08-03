@@ -11,18 +11,7 @@ class HomeController extends Controller
 {
     public function index(): View
     {
-        $commitCount = 0;
-        try {
-            $output = shell_exec('git rev-list --count HEAD 2>&1');
-            throw new \Exception('SHELL OUTPUT: ' . var_export($output, true));
-            /*
-            if ($output && is_numeric(trim($output))) {
-                $commitCount = (int) trim($output);
-            }
-            */
-        } catch (\Throwable $e) {
-            return 'ERROR: ' . $e->getMessage();
-        }
+        $commitCount = (int) env('TOTAL_COMMITS', 0);
 
         $stats = [
             'total_games' => Game::count(),
