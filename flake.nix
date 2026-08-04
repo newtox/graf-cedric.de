@@ -25,6 +25,10 @@
                 curl
                 zip
                 intl
+                filter
+                session
+                openssl
+                tokenizer
               ];
             })
             php83Packages.composer
