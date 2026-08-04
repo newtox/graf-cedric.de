@@ -14,9 +14,22 @@
       {
         devShells.default = pkgs.mkShell {
           buildInputs = with pkgs; [
-            php83
+            (php83.override {
+              extensions = { all, enabled }: with all; enabled ++ [
+                pdo
+                pdo_mysql
+                pdo_sqlite
+                dom
+                mbstring
+                xml
+                curl
+                zip
+                intl
+              ];
+            })
             php83Packages.composer
             nodejs_22
+            vscodium
           ];
         };
       }
