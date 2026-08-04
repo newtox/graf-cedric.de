@@ -12,7 +12,7 @@
                 <i class="ti ti-user"></i>
             </span>
             <div class="d-none d-xl-block ps-2">
-                <div>{{ __('Guest') }}</div>
+                <div>{{ __('menu.guest') }}</div>
             </div>
         @endauth
     </a>
@@ -30,12 +30,5 @@
                 <i class="ti ti-login me-2"></i>Login
             </a>
         @endauth
-        <div class="dropdown-divider"></div>
-        <a href="{{ route('language.switch', 'en') }}" class="dropdown-item">
-            <i class="ti ti-language me-2"></i>English
-        </a>
-        <a href="{{ route('language.switch', 'de') }}" class="dropdown-item">
-            <i class="ti ti-language me-2"></i>Deutsch
-        </a>
     </div>
 </div>
