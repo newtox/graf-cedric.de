@@ -32,33 +32,31 @@ class ModifyTablarMenu
         ];
 
         if ($request->user()) {
-            if ($request->user()->hasRole('Admin')) {
-                if ($request->user()->can('view games')) {
-                    $menu[] = [
-                        'text' => __('menu.games_management'),
-                        'url' => route('admin.games.index'),
-                        'icon' => 'ti ti-device-gamepad',
-                        'active' => request()->routeIs('admin.games.*')
-                    ];
-                }
+            if ($request->user()->can('view games')) {
+                $menu[] = [
+                    'text' => __('menu.games_management'),
+                    'url' => route('admin.games.index'),
+                    'icon' => 'ti ti-device-gamepad',
+                    'active' => request()->routeIs('admin.games.*')
+                ];
+            }
 
-                if ($request->user()->can('view tags')) {
-                    $menu[] = [
-                        'text' => __('menu.tags_management'),
-                        'url' => route('admin.tags.index'),
-                        'icon' => 'ti ti-tags',
-                        'active' => request()->routeIs('admin.tags.*')
-                    ];
-                }
+            if ($request->user()->can('view tags')) {
+                $menu[] = [
+                    'text' => __('menu.tags_management'),
+                    'url' => route('admin.tags.index'),
+                    'icon' => 'ti ti-tags',
+                    'active' => request()->routeIs('admin.tags.*')
+                ];
+            }
 
-                if ($request->user()->can('view users')) {
-                    $menu[] = [
-                        'text' => __('menu.users_management'),
-                        'url' => route('admin.users.index'),
-                        'icon' => 'ti ti-users',
-                        'active' => request()->routeIs('admin.users.*')
-                    ];
-                }
+            if ($request->user()->can('view users')) {
+                $menu[] = [
+                    'text' => __('menu.users_management'),
+                    'url' => route('admin.users.index'),
+                    'icon' => 'ti ti-users',
+                    'active' => request()->routeIs('admin.users.*')
+                ];
             }
         }
 
