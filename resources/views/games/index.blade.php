@@ -11,7 +11,7 @@
                 </div>
                 <div class="col-auto ms-auto">
                     <form action="{{ route('games.index') }}" method="GET" class="d-flex gap-2">
-                        <div class="input-icon">
+                        <div class="input-icon" style="width: 220px;">
                             <span class="input-icon-addon">
                                 <i class="ti ti-search text-muted"></i>
                             </span>
