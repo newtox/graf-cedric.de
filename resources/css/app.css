@@ -7,3 +7,14 @@
 body {
     overflow-x: hidden;
 }
+
+input::-webkit-search-cancel-button,
+input::-webkit-inner-spin-button,
+input::-webkit-clear-button {
+    display: none;
+    -webkit-appearance: none;
+}
+
+.form-control.is-invalid, .form-control {
+    background-image: none !important;
+}
