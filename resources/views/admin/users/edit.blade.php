@@ -14,40 +14,61 @@
     </div>
     <div class="page-body">
         <div class="container-xl">
-            <form action="{{ route('admin.users.update', $user) }}" method="POST">
+            <form action="{{ route('admin.users.update', $user) }}" method="POST" novalidate>
                 @csrf
                 @method('PUT')
                 <div class="card">
                     <div class="card-body">
                         <div class="mb-3">
                             <label class="form-label required">{{ __('users.fields.name') }}</label>
-                            <input type="text" name="name" class="form-control" value="{{ $user->name }}" required>
+                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name', $user->name) }}" required>
+
+                            @error('name')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="mb-3">
                             <label class="form-label required">{{ __('users.fields.email') }}</label>
-                            <input type="email" name="email" class="form-control" value="{{ $user->email }}" required>
+                            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email', $user->email) }}" required>
+
+                            @error('email')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="mb-3">
                             <label class="form-label">{{ __('users.fields.password') }}</label>
-                            <input type="password" name="password" class="form-control">
+                            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror">
                             <small class="form-hint">{{ __('users.hints.leave_blank') }}</small>
+
+                            @error('password')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="mb-3">
                             <label class="form-label">{{ __('users.fields.password_confirmation') }}</label>
-                            <input type="password" name="password_confirmation" class="form-control">
+                            <input type="password" name="password_confirmation" class="form-control @error('password') is-invalid @enderror">
+
+                            @error('password')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">{{ __('users.fields.roles') }}</label>
+                            <label class="form-label required">{{ __('users.fields.roles') }}</label>
+                            
                             @foreach($roles as $role)
                                 <label class="form-check">
-                                    <input type="checkbox"
-                                           name="roles[]"
+                                    <input type="checkbox" 
+                                           name="roles[]" 
                                            value="{{ $role->id }}"
                                            class="form-check-input"
-                                        {{ $user->hasRole($role->name) ? 'checked' : '' }}>
+                                           {{ (is_array(old('roles')) && in_array($role->id, old('roles'))) || (!old() && $user->hasRole($role->name)) ? 'checked' : '' }}>
                                     <span class="form-check-label">{{ $role->name }}</span>
                                 </label>
                             @endforeach
+
+                            @error('roles')
+                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="card-footer text-start">

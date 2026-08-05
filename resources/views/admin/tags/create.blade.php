@@ -14,28 +14,35 @@
     </div>
     <div class="page-body">
         <div class="container-xl">
-            <form action="{{ route('admin.tags.store') }}" method="POST">
+            <form action="{{ route('admin.tags.store') }}" method="POST" novalidate>
                 @csrf
                 <div class="card">
                     <div class="card-body">
                         <div class="mb-3">
                             <label class="form-label required">{{ __('tags.fields.name') }}</label>
-                            <input type="text" name="name" class="form-control" value="{{ old('name') }}" required>
+                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" required>
+                            @error('name')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="mb-3">
                             <label class="form-label required">{{ __('tags.fields.color') }}</label>
-                            <select name="color" class="form-select" required>
-                                <option value="orange">Orange</option>
-                                <option value="yellow">Yellow</option>
-                                <option value="green">Green</option>
-                                <option value="purple">Purple</option>
-                                <option value="blue">Blue</option>
-                                <option value="indigo">Indigo</option>
-                                <option value="red">Red</option>
-                                <option value="azure">Azure</option>
-                                <option value="lime">Lime</option>
-                                <option value="cyan">Cyan</option>
+                            <select name="color" class="form-select @error('color') is-invalid @enderror" required>
+                                <option value="orange" {{ old('color') === 'orange' ? 'selected' : '' }}>Orange</option>
+                                <option value="yellow" {{ old('color') === 'yellow' ? 'selected' : '' }}>Yellow</option>
+                                <option value="green" {{ old('color') === 'green' ? 'selected' : '' }}>Green</option>
+                                <option value="purple" {{ old('color') === 'purple' ? 'selected' : '' }}>Purple</option>
+                                <option value="blue" {{ old('color') === 'blue' ? 'selected' : '' }}>Blue</option>
+                                <option value="indigo" {{ old('color') === 'indigo' ? 'selected' : '' }}>Indigo</option>
+                                <option value="red" {{ old('color') === 'red' ? 'selected' : '' }}>Red</option>
+                                <option value="azure" {{ old('color') === 'azure' ? 'selected' : '' }}>Azure</option>
+                                <option value="lime" {{ old('color') === 'lime' ? 'selected' : '' }}>Lime</option>
+                                <option value="cyan" {{ old('color') === 'cyan' ? 'selected' : '' }}>Cyan</option>
                             </select>
+
+                            @error('color')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="card-footer text-start">

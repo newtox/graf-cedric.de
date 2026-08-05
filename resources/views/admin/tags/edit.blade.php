@@ -14,29 +14,36 @@
     </div>
     <div class="page-body">
         <div class="container-xl">
-            <form action="{{ route('admin.tags.update', $tag) }}" method="POST">
+            <form action="{{ route('admin.tags.update', $tag) }}" method="POST" novalidate>
                 @csrf
                 @method('PUT')
                 <div class="card">
                     <div class="card-body">
                         <div class="mb-3">
                             <label class="form-label required">{{ __('tags.fields.name') }}</label>
-                            <input type="text" name="name" class="form-control" value="{{ $tag->name }}" required>
+                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name', $tag->name) }}" required>
+                            @error('name')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="mb-3">
                             <label class="form-label required">{{ __('tags.fields.color') }}</label>
-                            <select name="color" class="form-select" required>
-                                <option value="orange" {{ $tag->color === 'orange' ? 'selected' : '' }}>Orange</option>
-                                <option value="yellow" {{ $tag->color === 'yellow' ? 'selected' : '' }}>Yellow</option>
-                                <option value="green" {{ $tag->color === 'green' ? 'selected' : '' }}>Green</option>
-                                <option value="purple" {{ $tag->color === 'purple' ? 'selected' : '' }}>Purple</option>
-                                <option value="blue" {{ $tag->color === 'blue' ? 'selected' : '' }}>Blue</option>
-                                <option value="indigo" {{ $tag->color === 'indigo' ? 'selected' : '' }}>Indigo</option>
-                                <option value="red" {{ $tag->color === 'red' ? 'selected' : '' }}>Red</option>
-                                <option value="azure" {{ $tag->color === 'azure' ? 'selected' : '' }}>Azure</option>
-                                <option value="lime" {{ $tag->color === 'lime' ? 'selected' : '' }}>Lime</option>
-                                <option value="cyan" {{ $tag->color === 'cyan' ? 'selected' : '' }}>Cyan</option>
+                            <select name="color" class="form-select @error('color') is-invalid @enderror" required>
+                                <option value="orange" {{ old('color', $tag->color) === 'orange' ? 'selected' : '' }}>Orange</option>
+                                <option value="yellow" {{ old('color', $tag->color) === 'yellow' ? 'selected' : '' }}>Yellow</option>
+                                <option value="green" {{ old('color', $tag->color) === 'green' ? 'selected' : '' }}>Green</option>
+                                <option value="purple" {{ old('color', $tag->color) === 'purple' ? 'selected' : '' }}>Purple</option>
+                                <option value="blue" {{ old('color', $tag->color) === 'blue' ? 'selected' : '' }}>Blue</option>
+                                <option value="indigo" {{ old('color', $tag->color) === 'indigo' ? 'selected' : '' }}>Indigo</option>
+                                <option value="red" {{ old('color', $tag->color) === 'red' ? 'selected' : '' }}>Red</option>
+                                <option value="azure" {{ old('color', $tag->color) === 'azure' ? 'selected' : '' }}>Azure</option>
+                                <option value="lime" {{ old('color', $tag->color) === 'lime' ? 'selected' : '' }}>Lime</option>
+                                <option value="cyan" {{ old('color', $tag->color) === 'cyan' ? 'selected' : '' }}>Cyan</option>
                             </select>
+
+                            @error('color')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="card-footer text-start">

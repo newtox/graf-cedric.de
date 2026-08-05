@@ -16,7 +16,8 @@ class UserRequest extends FormRequest
         $rules = [
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email' . ($this->user ? ',' . $this->user->id : ''),
-            'roles' => 'required|array'
+            'roles' => 'required|array|min:1',
+            'roles.*' => 'exists:roles,id'
         ];
 
         if ($this->isMethod('POST') || $this->filled('password')) {

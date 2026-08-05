@@ -14,67 +14,84 @@
     </div>
     <div class="page-body">
         <div class="container-xl">
-            <form action="{{ route('admin.games.update', $game) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.games.update', $game) }}" method="POST" enctype="multipart/form-data" novalidate>
                 @csrf
+                @method('PUT')
                 <div class="card">
                     <div class="card-body">
                         <div class="mb-3">
                             <label class="form-label required">{{ __('games.fields.title') }}</label>
-                            <input type="text" name="title" class="form-control" value="{{ $game->title }}" required>
+                            <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title', $game->title) }}" required>
+
+                            @error('title')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="mb-3">
                             <label class="form-label">{{ __('games.fields.thumbnail') }}</label>
-                            <input type="file" name="thumbnail" class="form-control" accept="image/*">
+                            <input type="file" name="thumbnail" class="form-control @error('thumbnail') is-invalid @enderror" accept="image/*">
+
+                            @error('thumbnail')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label class="form-label required">{{ __('games.fields.developer_name') }}</label>
-                                    <input type="text" name="developer_name" class="form-control"
-                                           value="{{ $game->developer_name }}" required>
-                                </div>
+                                    <input type="text" name="developer_name" class="form-control @error('developer_name') is-invalid @enderror" value="{{ old('developer_name', $game->developer_name) }}" required>
 
+                                    @error('developer_name')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
                                 <div class="mb-3">
                                     <label class="form-label">{{ __('games.fields.developer_image') }}</label>
-                                    <input type="file" name="developer_image" class="form-control" accept="image/*">
+                                    <input type="file" name="developer_image" class="form-control @error('developer_image') is-invalid @enderror" accept="image/*">
+
+                                    @error('developer_image')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label class="form-label required">{{ __('games.fields.publisher_name') }}</label>
-                                    <input type="text" name="publisher_name" class="form-control"
-                                           value="{{ $game->publisher_name }}" required>
-                                </div>
+                                    <input type="text" name="publisher_name" class="form-control @error('publisher_name') is-invalid @enderror" value="{{ old('publisher_name', $game->publisher_name) }}" required>
 
+                                    @error('publisher_name')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
                                 <div class="mb-3">
                                     <label class="form-label">{{ __('games.fields.publisher_image') }}</label>
-                                    <input type="file" name="publisher_image" class="form-control" accept="image/*">
+                                    <input type="file" name="publisher_image" class="form-control @error('publisher_image') is-invalid @enderror" accept="image/*">
+
+                                    @error('publisher_image')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">{{ __('games.fields.tags') }}</label>
                             <div class="dropdown">
-                                <button class="btn dropdown-toggle"
-                                        type="button"
-                                        data-bs-auto-close="outside"
-                                        data-bs-toggle="dropdown">
+                                <button class="btn dropdown-toggle" type="button" data-bs-auto-close="outside" data-bs-toggle="dropdown">
                                     {{ __('games.fields.tags') }}
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-end p-3">
                                     @foreach($tags as $tag)
                                         <label class="dropdown-item rounded-2 d-flex align-items-center mb-1">
-                                            <input type="checkbox"
-                                                   name="tags[]"
-                                                   value="{{ $tag->id }}"
-                                                   class="form-check-input me-2 d-none"
-                                                   data-color="{{ $tag->color }}"
-                                                    {{ in_array($tag->id, $game->tags->pluck('id')->toArray()) ? 'checked' : '' }}>
+                                            <input type="checkbox" name="tags[]" value="{{ $tag->id }}" class="form-check-input me-2 d-none" data-color="{{ $tag->color }}" {{ (is_array(old('tags')) && in_array($tag->id, old('tags'))) || (!old() && in_array($tag->id, $game->tags->pluck('id')->toArray())) ? 'checked' : '' }}>
                                             <span class="tag-label">{{ $tag->name }}</span>
                                         </label>
                                     @endforeach
                                 </div>
                             </div>
+
+                            @error('tags')
+                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="card-footer text-start">
