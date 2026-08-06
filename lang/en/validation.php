@@ -1,15 +1,37 @@
 <?php
+
 return [
-    'required' => 'The \':attribute\' field is required.',
-    'string' => 'The \':attribute\' must be a string.',
-    'email' => 'The \':attribute\' must be a valid email address.',
-    'unique' => 'The \':attribute\' has already been taken.',
-    'min' => [
-        'string' => 'The \':attribute\' must be at least :min characters.',
-    ],
-    'confirmed' => 'The \':attribute\' confirmation does not match.',
-    'image' => 'The \':attribute\' must be an image.',
+    'required' => 'The :attribute field is required.',
+    'email' => 'The :attribute must be a valid email address.',
+    'string' => 'The :attribute must be a string.',
+    'image' => 'The :attribute must be an image.',
+    'unique' => 'The :attribute has already been taken.',
+    'confirmed' => 'The :attribute confirmation does not match.',
+    'exists' => 'The selected :attribute is invalid.',
+    'regex' => 'The :attribute format is invalid.',
+    'current_password' => 'The password is incorrect.',
+    'boolean' => 'The :attribute field must be true or false.',
+
     'max' => [
-        'file' => 'The \':attribute\' must not be greater than :max kilobytes.',
+        'string' => 'The :attribute must not be greater than :max characters.',
+        'file' => 'The :attribute must not be greater than :max kilobytes.',
+    ],
+    'min' => [
+        'string' => 'The :attribute must be at least :min characters.',
+    ],
+
+    'attributes' => [
+        'name' => 'name',
+        'email' => 'email',
+        'password' => 'password',
+        'password_confirmation' => 'password confirmation',
+        'current_password' => 'current password',
+        'username' => 'username',
+        'display_name' => 'display name',
+        'title' => 'title',
+        'bio' => 'bio',
+        'avatar' => 'avatar',
+        'body' => 'body',
+        'image' => 'image',
     ],
 ];
