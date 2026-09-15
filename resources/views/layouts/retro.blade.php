@@ -3,13 +3,29 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ $title ?? __('menu.dashboard') }} &mdash; Graf Cedric</title>
+
+    <title>@yield('title', __('menu.dashboard')) &mdash; Graf Cedric von Leuchtenberg</title>
+    <meta name="description" content="@yield('meta_description', __('about.tagline'))">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="@yield('title', __('menu.dashboard')) &mdash; Graf Cedric">
+    <meta property="og:description" content="@yield('meta_description', __('about.tagline'))">
+    <meta property="og:image" content="{{ asset('storage/images/Profile.png') }}">
+    <meta property="og:url" content="{{ url()->current() }}">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="@yield('title', __('menu.dashboard')) &mdash; Graf Cedric">
+    <meta name="twitter:description" content="@yield('meta_description', __('about.tagline'))">
+    <meta name="twitter:image" content="{{ asset('storage/images/Profile.png') }}">
+
+    <link rel="icon" href="{{ asset('storage/images/Profile.png') }}">
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-retro-bg text-retro-text min-h-screen">
     <div class="max-w-6xl mx-2 sm:mx-auto my-3 sm:my-6 pixel-border overflow-hidden bg-retro-panel">
 
-        <div class="relative h-28 sm:h-40 bg-cover bg-repeat-x flex items-center justify-between px-4 sm:px-8">
+        <div class="relative bg-cover bg-repeat-x flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-4 py-4 sm:h-40 sm:py-0 sm:px-8" style="background-image: url('{{ asset('storage/images/banner-bg.png') }}');">
             <div>
                 <h1 class="font-pixel text-lg sm:text-2xl md:text-3xl text-white" style="text-shadow: 3px 3px 0 rgb(var(--c-border));">
                     Graf Cedric von Leuchtenberg

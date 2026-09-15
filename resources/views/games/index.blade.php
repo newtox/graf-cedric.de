@@ -4,11 +4,10 @@
     <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
         <h2 class="font-pixel text-sm text-retro-accent2">{{ __('games.title') }}</h2>
 
-        <form action="{{ route('games.index') }}" method="GET" class="flex items-center gap-2">
+        <form action="{{ route('games.index') }}" method="GET" class="flex flex-wrap items-center gap-2">
             <input type="text" name="search" value="{{ request('search') }}"
-                   placeholder="{{ __('games.fields.search') }}"
-                   title="{{ __('games.fields.search') }}"
-                   class="bg-retro-bg border-2 border-retro-border text-retro-text font-mono text-lg p-2 w-56">
+                    placeholder="{{ __('games.fields.search') }}" title="{{ __('games.fields.search') }}"
+                    class="bg-retro-bg border-2 border-retro-border text-retro-text font-mono text-lg p-2 w-40 sm:w-56">
 
             <div x-data="{ open: false }" class="relative">
                 <button type="button" @click="open = !open"
