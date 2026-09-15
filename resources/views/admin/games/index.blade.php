@@ -46,7 +46,7 @@
             <div class="pixel-border bg-retro-panel p-3" x-data="{ confirmingDelete: false }">
                 <div class="flex items-center gap-3 mb-3">
                     @if($game->thumbnail)
-                        <img src="{{ $game->thumbnail }}" class="w-12 h-12 object-contain bg-white pixel-border !border-2 shrink-0">
+                        <img src="{{ $game->thumbnail }}" class="w-12 h-12 object-contain bg-retro-panelLight pixel-border !border-2 shrink-0">
                     @endif
                     <div class="min-w-0">
                         <p class="font-mono text-lg truncate">{{ $game->title }}</p>
@@ -122,14 +122,14 @@
                     <tr class="border-b border-retro-border/50" x-data="{ confirmingDelete: false }">
                         <td class="p-3">
                             @if($game->thumbnail)
-                                <img src="{{ $game->thumbnail }}" class="w-10 h-10 object-contain bg-white pixel-border !border-2">
+                                <img src="{{ $game->thumbnail }}" class="w-10 h-10 object-contain bg-retro-panelLight pixel-border !border-2">
                             @endif
                         </td>
                         <td class="p-3">{{ $game->title }}</td>
                         <td class="p-3">
                             <div class="flex items-center gap-2">
                                 @if($game->developer?->image)
-                                    <img src="{{ $game->developer->image }}" class="w-6 h-6 object-contain bg-white pixel-border !border-2">
+                                    <img src="{{ $game->developer->image }}" class="w-6 h-6 object-contain bg-retro-panelLight pixel-border !border-2">
                                 @endif
                                 {{ $game->developer?->name }}
                             </div>
@@ -137,7 +137,7 @@
                         <td class="p-3">
                             <div class="flex items-center gap-2">
                                 @if($game->publisher?->image)
-                                    <img src="{{ $game->publisher->image }}" class="w-6 h-6 object-contain bg-white pixel-border !border-2">
+                                    <img src="{{ $game->publisher->image }}" class="w-6 h-6 object-contain bg-retro-panelLight pixel-border !border-2">
                                 @endif
                                 {{ $game->publisher?->name }}
                             </div>

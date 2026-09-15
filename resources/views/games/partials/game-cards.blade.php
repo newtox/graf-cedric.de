@@ -1,6 +1,6 @@
 @forelse($games as $game)
     <a href="{{ route('games.show', $game) }}" class="pixel-border bg-retro-panel block hover:brightness-110 transition">
-        <div class="h-40 bg-white flex items-center justify-center"
+        <div class="h-40 bg-retro-panelLight flex items-center justify-center"
              style="background-image: url('{{ $game->thumbnail }}'); background-size: contain; background-repeat: no-repeat; background-position: center;">
         </div>
         <div class="p-4">

@@ -4,7 +4,7 @@
     <a href="{{ url()->previous() ?: route('games.index') }}" class="text-sm text-retro-muted hover:text-retro-accent2 transition font-mono">&larr; {{ __('games.title') }}</a>
 
     <div class="pixel-border bg-retro-panel mt-4 max-w-xl mx-auto overflow-hidden">
-        <div class="h-56 bg-white flex items-center justify-center"
+        <div class="h-56 bg-retro-panelLight flex items-center justify-center"
              style="background-image: url('{{ $game->thumbnail }}'); background-size: contain; background-repeat: no-repeat; background-position: center;">
         </div>
 
@@ -25,7 +25,7 @@
                         <p class="text-retro-muted text-sm font-pixel mb-2">{{ __('games.fields.developer_name') }}</p>
                         <div class="flex items-center gap-3">
                             @if($game->developer->image)
-                                <div class="w-16 h-16 bg-white pixel-border !border-2 flex items-center justify-center"
+                                <div class="w-16 h-16 bg-retro-panelLight pixel-border !border-2 flex items-center justify-center"
                                      style="background-image: url('{{ $game->developer->image }}'); background-size: contain; background-repeat: no-repeat; background-position: center;">
                                 </div>
                             @endif
@@ -39,7 +39,7 @@
                         <p class="text-retro-muted text-sm font-pixel mb-2">{{ __('games.fields.publisher_name') }}</p>
                         <div class="flex items-center gap-3">
                             @if($game->publisher->image)
-                                <div class="w-16 h-16 bg-white pixel-border !border-2 flex items-center justify-center"
+                                <div class="w-16 h-16 bg-retro-panelLight pixel-border !border-2 flex items-center justify-center"
                                      style="background-image: url('{{ $game->publisher->image }}'); background-size: contain; background-repeat: no-repeat; background-position: center;">
                                 </div>
                             @endif

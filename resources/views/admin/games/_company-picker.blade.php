@@ -33,7 +33,7 @@
             @endforeach
         </select>
         <template x-if="images[selectedId]">
-            <img :src="images[selectedId]" class="w-10 h-10 object-contain pixel-border !border-2 bg-white">
+            <img :src="images[selectedId]" class="w-10 h-10 object-contain pixel-border !border-2 bg-retro-panelLight">
         </template>
     </div>
 
