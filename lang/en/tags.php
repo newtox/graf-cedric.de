@@ -5,7 +5,8 @@ return [
     'edit' => 'Edit Tag',
     'fields' => [
         'name' => 'Name',
-        'color' => 'Color'
+        'color' => 'Color',
+        'color_hint' => 'Click the color box to pick a custom color'
     ],
     'messages' => [
         'created' => 'Tag created successfully',

@@ -1,127 +1,62 @@
-@extends('tablar::page')
-
-@section('title', __('games.create'))
+@extends('layouts.retro')
 
 @section('content')
-    <div class="page-header d-print-none">
-        <div class="container-xl">
-            <div class="row g-2 align-items-center">
-                <div class="col">
-                    <h2 class="page-title">{{ __('games.create') }}</h2>
-                </div>
+    <h2 class="font-pixel text-sm text-retro-accent2 mb-6">{{ __('games.create') }}</h2>
+
+    <form action="{{ route('admin.games.store') }}" method="POST" enctype="multipart/form-data" class="pixel-border bg-retro-panel p-6" novalidate>
+        @csrf
+
+        <div class="mb-4">
+            <label class="font-pixel text-xs text-retro-accent2 block mb-2">{{ __('games.fields.title') }}</label>
+            <input type="text" name="title" value="{{ old('title') }}"
+                   class="w-full bg-retro-bg border-2 border-retro-border text-retro-text font-mono text-lg p-2">
+            @error('title') <p class="text-red-400 font-mono text-sm mt-1">{{ $message }}</p> @enderror
+        </div>
+
+        <div class="mb-4">
+            <label class="font-pixel text-xs text-retro-accent2 block mb-2">{{ __('games.fields.thumbnail') }}</label>
+            <input type="file" name="thumbnail" accept="image/*" class="w-full text-sm font-mono text-retro-text">
+            @error('thumbnail') <p class="text-red-400 font-mono text-sm mt-1">{{ $message }}</p> @enderror
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            @include('admin.games._company-picker', [
+                'prefix' => 'developer',
+                'label' => __('games.fields.developer_name'),
+                'companies' => $companies,
+                'selected' => '',
+            ])
+            @include('admin.games._company-picker', [
+                'prefix' => 'publisher',
+                'label' => __('games.fields.publisher_name'),
+                'companies' => $companies,
+                'selected' => '',
+            ])
+        </div>
+
+        <div class="mb-4">
+            <label class="font-pixel text-xs text-retro-accent2 block mb-2">{{ __('games.fields.tags') }}</label>
+            <div class="flex flex-wrap gap-2">
+                @foreach($tags as $tag)
+                    <label class="cursor-pointer">
+                        <input type="checkbox" name="tags[]" value="{{ $tag->id }}" class="peer hidden"
+                               {{ in_array($tag->id, old('tags', [])) ? 'checked' : '' }}>
+                        <span class="inline-block px-3 py-1 font-pixel text-xs bg-retro-bg text-retro-text peer-checked:bg-[var(--tag-color)] peer-checked:text-white transition" style="--tag-color: {{ $tag->color_hex }}">
+                            {{ $tag->name }}
+                        </span>
+                    </label>
+                @endforeach
             </div>
+            @error('tags') <p class="text-red-400 font-mono text-sm mt-1">{{ $message }}</p> @enderror
         </div>
-    </div>
-    <div class="page-body">
-        <div class="container-xl">
-            <form action="{{ route('admin.games.store') }}" method="POST" enctype="multipart/form-data" novalidate>
-                @csrf
-                <div class="card">
-                    <div class="card-body">
-                        <div class="mb-3">
-                            <label class="form-label required">{{ __('games.fields.title') }}</label>
-                            <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title') }}" required>
 
-                            @error('title')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">{{ __('games.fields.thumbnail') }}</label>
-                            <input type="file" name="thumbnail" class="form-control @error('thumbnail') is-invalid @enderror" accept="image/*">
-
-                            @error('thumbnail')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label class="form-label required">{{ __('games.fields.developer_name') }}</label>
-                                    <input type="text" name="developer_name" class="form-control @error('developer_name') is-invalid @enderror" value="{{ old('developer_name') }}" required>
-
-                                    @error('developer_name')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">{{ __('games.fields.developer_image') }}</label>
-                                    <input type="file" name="developer_image" class="form-control @error('developer_image') is-invalid @enderror" accept="image/*">
-
-                                    @error('developer_image')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label class="form-label required">{{ __('games.fields.publisher_name') }}</label>
-                                    <input type="text" name="publisher_name" class="form-control @error('publisher_name') is-invalid @enderror" value="{{ old('publisher_name') }}" required>
-
-                                    @error('publisher_name')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">{{ __('games.fields.publisher_image') }}</label>
-                                    <input type="file" name="publisher_image" class="form-control @error('publisher_image') is-invalid @enderror" accept="image/*">
-
-                                    @error('publisher_image')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">{{ __('games.fields.tags') }}</label>
-                            <div class="dropdown">
-                                <button class="btn dropdown-toggle" type="button" data-bs-auto-close="outside" data-bs-toggle="dropdown">
-                                    {{ __('games.fields.tags') }}
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-end p-3">
-                                    @foreach($tags as $tag)
-                                        <label class="dropdown-item rounded-2 d-flex align-items-center mb-1">
-                                            <input type="checkbox" name="tags[]" value="{{ $tag->id }}" class="form-check-input me-2 d-none" data-color="{{ $tag->color }}" {{ in_array($tag->id, old('tags', [])) ? 'checked' : '' }}>
-                                            <span class="tag-label">{{ $tag->name }}</span>
-                                        </label>
-                                    @endforeach
-                                </div>
-                            </div>
-
-                            @error('tags')
-                                <div class="invalid-feedback d-block">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="card-footer text-start">
-                        <a href="{{ url()->previous() ?: route('admin.games.index') }}" class="btn btn-secondary me-2">
-                            <i class="ti ti-arrow-back me-2"></i>
-                        </a>
-                        <button type="submit" class="btn btn-primary me-2">
-                            <i class="ti ti-send me-2"></i>
-                            {{ __('games.create') }}
-                        </button>
-                    </div>
-                </div>
-            </form>
+        <div class="flex gap-3 mt-6">
+            <a href="{{ route('admin.games.index') }}" class="pixel-border !border-2 px-4 py-2 font-pixel text-xs bg-retro-bg text-retro-text">
+                &larr;
+            </a>
+            <button type="submit" class="pixel-border !border-2 px-4 py-2 font-pixel text-xs bg-retro-accent text-white">
+                {{ __('games.create') }}
+            </button>
         </div>
-    </div>
-
-    <script>
-        document.querySelectorAll('input[type="checkbox"][data-color]').forEach(checkbox => {
-            const label = checkbox.closest('.dropdown-item');
-
-            if (checkbox.checked) {
-                label.classList.add(`bg-${checkbox.dataset.color}`);
-            }
-
-            checkbox.addEventListener('change', () => {
-                if (checkbox.checked) {
-                    label.classList.add(`bg-${checkbox.dataset.color}`);
-                } else {
-                    label.classList.remove(`bg-${checkbox.dataset.color}`);
-                }
-            });
-        });
-    </script>
+    </form>
 @endsection

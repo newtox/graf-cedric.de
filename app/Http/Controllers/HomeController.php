@@ -17,7 +17,7 @@ class HomeController extends Controller
             'total_games' => Game::count(),
             'total_tags' => Tag::count(),
             'total_commits' => $commitCount,
-            'latest_games' => Game::with('tags')->latest()->take(5)->get(),
+            'latest_games' => Game::with(['tags', 'developer'])->latest()->take(5)->get(),
             'games_by_tag' => Tag::withCount('games')->orderByRaw("
                 CASE
                     WHEN name LIKE 'Alpha%' THEN 1

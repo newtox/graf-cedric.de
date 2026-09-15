@@ -11,12 +11,14 @@ class GameController extends Controller
 {
     public function index(Request $request): View
     {
-        $query = Game::with('tags');
+        $query = Game::with(['tags', 'developer', 'publisher']);
 
         if ($request->has('search')) {
             $query->where(function ($q) use ($request) {
                 $q->where('games.title', 'like', '%' . $request->search . '%')
-                    ->orWhere('games.developer_name', 'like', '%' . $request->search . '%');
+                    ->orWhereHas('developer', function ($q2) use ($request) {
+                        $q2->where('name', 'like', '%' . $request->search . '%');
+                    });
             });
         }
 
@@ -48,7 +50,7 @@ class GameController extends Controller
 
     public function show(Game $game): View
     {
-        $game->load('tags');
+        $game->load(['tags', 'developer', 'publisher']);
         return view('games.show', compact('game'));
     }
 }

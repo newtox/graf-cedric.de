@@ -12,6 +12,9 @@ return [
         'publisher_name' => 'Publisher',
         'publisher_image' => 'Publisher Bild',
         'thumbnail' => 'Vorschaubild',
+        'use_existing' => 'Bestehenden nutzen',
+        'add_new' => 'Neuen anlegen',
+        'select_placeholder' => '-- Auswählen --',
         'search' => 'Nach Spiel oder Entwickler suchen... drücke \'Enter\' zum suchen',
         'tags' => 'Tags',
         'filter' => 'Filter anwenden'

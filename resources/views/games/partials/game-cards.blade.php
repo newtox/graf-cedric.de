@@ -1,22 +1,21 @@
-@foreach($games as $game)
-    <div class="col-sm-6 col-lg-4">
-        <a href="{{ route('games.show', $game) }}" class="card card-sm text-reset">
-            <div class="card-img-top img-responsive img-responsive-16x9"
-                 style="background-image: url('{{ $game->thumbnail }}');
-                 background-size: contain;
-                 background-repeat: no-repeat;
-                 background-position: center;">
+@forelse($games as $game)
+    <a href="{{ route('games.show', $game) }}" class="pixel-border bg-retro-panel block hover:brightness-110 transition">
+        <div class="h-40 bg-white flex items-center justify-center"
+             style="background-image: url('{{ $game->thumbnail }}'); background-size: contain; background-repeat: no-repeat; background-position: center;">
+        </div>
+        <div class="p-4">
+            <h3 class="font-pixel text-xs text-retro-text mb-3">{{ $game->title }}</h3>
+            <div class="flex flex-wrap gap-1">
+                @foreach($game->tags as $tag)
+                    <span class="inline-block px-2 py-0.5 text-xs text-white font-pixel" style="background-color: {{ $tag->color_hex }}">
+                        {{ $tag->name }}
+                    </span>
+                @endforeach
             </div>
-            <div class="card-body">
-                <h3 class="card-title">{{ $game->title }}</h3>
-                <div class="mt-3">
-                    @foreach($game->tags as $tag)
-                        <span class="badge bg-{{ $tag->color }} text-bg-dark me-2">
-                            {{ $tag->name }}
-                        </span>
-                    @endforeach
-                </div>
-            </div>
-        </a>
-    </div>
-@endforeach
+        </div>
+    </a>
+@empty
+    <p class="col-span-full text-center text-retro-muted font-mono text-lg py-8">
+        {{ __('common.no_results') }}
+    </p>
+@endforelse

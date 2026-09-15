@@ -16,7 +16,7 @@ Welcome to the **Graf-Cedric.de** repository! This is a Laravel-based web applic
 ## Overview
 
 - **Functionality**: A robust game management system with user roles, permissions, and a clean admin interface
-- **Technology**: Built with Laravel 10, using Tabler for the admin UI and modern frontend tools
+- **Technology**: Built with Laravel 10, Tailwind CSS and Alpine.js — custom retro pixel-art theme with sidebar navigation
 
 ## How to Use
 
@@ -62,16 +62,13 @@ Welcome to the **Graf-Cedric.de** repository! This is a Laravel-based web applic
 #### Backend (composer.json):
 - **Laravel Framework**: ^10.0
 - **Laravel Sanctum**: ^3.2
+- **Laravel UI**: ^4.6
 - **Spatie Laravel Permission**: ^6.10
-- **Tablar**: 10.0 (UI)
 
 #### Frontend (package.json):
-- **@tabler/core**: ^1.0.0-beta20
-- **@tabler/icons**: ^2.47.0
-- **Bootstrap**: 5.3.1
-- **jQuery**: 3.7.*
-- **Sass**: ~1.64.2
-- **Vite**: ^4.0.0y
+- **Tailwind CSS**: ^3.0
+- **Alpine.js**: ^3.17
+- **Vite**: ^4.0.0
 
 ### Usage
 

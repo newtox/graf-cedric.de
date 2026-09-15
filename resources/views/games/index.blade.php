@@ -1,84 +1,43 @@
-@extends('tablar::page')
-
-@section('title', __('games.title'))
+@extends('layouts.retro')
 
 @section('content')
-    <div class="page-header d-print-none">
-        <div class="container-xl">
-            <div class="row g-2 align-items-center">
-                <div class="col">
-                    <h2 class="page-title">{{ __('games.title') }}</h2>
-                </div>
-                <div class="col-auto ms-auto">
-                    <form action="{{ route('games.index') }}" method="GET" class="d-flex gap-2">
-                        <div class="input-icon" style="width: 220px;">
-                            <span class="input-icon-addon">
-                                <i class="ti ti-search text-muted"></i>
-                            </span>
-                            <input type="text"
-                                   class="form-control"
-                                   name="search"
-                                   value="{{ request('search') }}"
-                                   data-bs-toggle="tooltip"
-                                   data-bs-placement="top"
-                                   title="{{ __('games.fields.search') }}">
-                        </div>
-                        <div class="dropdown">
-                            <button class="btn dropdown-toggle"
-                                    type="button"
-                                    data-bs-auto-close="outside"
-                                    data-bs-toggle="dropdown">
-                                {{ __('games.fields.tags') }}
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-end p-3">
-                                @foreach($tags as $tag)
-                                    <label class="dropdown-item rounded-2 d-flex align-items-center mb-1">
-                                        <input type="checkbox"
-                                               name="tags[]"
-                                               value="{{ $tag->id }}"
-                                               class="form-check-input me-2 d-none"
-                                               data-color="{{ $tag->color }}"
-                                            {{ in_array($tag->id, (array)request('tags')) ? 'checked' : '' }}>
-                                        <span class="tag-label">{{ $tag->name }}</span>
-                                    </label>
-                                @endforeach
-                                <div class="dropdown-divider"></div>
-                                <button type="submit" class="dropdown-item rounded-2 text-reset">
-                                    {{ __('games.fields.filter') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+    <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+        <h2 class="font-pixel text-sm text-retro-accent2">{{ __('games.title') }}</h2>
+
+        <form action="{{ route('games.index') }}" method="GET" class="flex items-center gap-2">
+            <input type="text" name="search" value="{{ request('search') }}"
+                   placeholder="{{ __('games.fields.search') }}"
+                   title="{{ __('games.fields.search') }}"
+                   class="bg-retro-bg border-2 border-retro-border text-retro-text font-mono text-lg p-2 w-56">
+
+            <div x-data="{ open: false }" class="relative">
+                <button type="button" @click="open = !open"
+                    class="pixel-border !border-2 px-3 py-2 font-pixel text-xs bg-retro-panel text-retro-text">
+                    {{ __('games.fields.tags') }}
+                </button>
+                <div x-show="open" x-cloak @click.outside="open = false"
+                    class="absolute right-0 mt-2 w-56 pixel-border bg-retro-panel p-3 z-10 max-h-72 overflow-y-auto">
+                    @foreach($tags as $tag)
+                        <label class="flex items-center gap-2 mb-2 font-mono text-lg cursor-pointer">
+                            <input type="checkbox" name="tags[]" value="{{ $tag->id }}"
+                                {{ in_array($tag->id, (array) request('tags')) ? 'checked' : '' }}>
+                            <span class="inline-block w-3 h-3 rounded-full" style="background-color: {{ $tag->color_hex }}"></span>
+                            {{ $tag->name }}
+                        </label>
+                    @endforeach
+                    <button type="submit" class="w-full mt-2 pixel-border !border-2 px-3 py-1.5 font-pixel text-xs bg-retro-accent text-white">
+                        {{ __('games.fields.filter') }}
+                    </button>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="page-body">
-        <div class="container-xl">
-            <div class="row row-cards">
-                @include('games.partials.game-cards')
-            </div>
-            <div class="mt-4">
-                {{ $games->links() }}
-            </div>
-        </div>
+        </form>
     </div>
 
-    <script>
-        document.querySelectorAll('input[type="checkbox"][data-color]').forEach(checkbox => {
-            const label = checkbox.closest('.dropdown-item');
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="games-grid">
+        @include('games.partials.game-cards')
+    </div>
 
-            if (checkbox.checked) {
-                label.classList.add(`bg-${checkbox.dataset.color}`);
-            }
-
-            checkbox.addEventListener('change', () => {
-                if (checkbox.checked) {
-                    label.classList.add(`bg-${checkbox.dataset.color}`);
-                } else {
-                    label.classList.remove(`bg-${checkbox.dataset.color}`);
-                }
-            });
-        });
-    </script>
+    <div class="mt-6">
+        {{ $games->links() }}
+    </div>
 @endsection

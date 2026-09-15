@@ -1,20 +1,29 @@
-.table-responsive {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    touch-action: pan-x;
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    color-scheme: dark;
+    --c-bg: 19 26 41;
+    --c-panel: 24 33 51;
+    --c-panel-light: 35 45 66;
+    --c-border: 14 19 31;
+    --c-accent: 32 107 196;
+    --c-accent2: 76 154 255;
+    --c-text: 255 255 255;
+    --c-muted: 151 162 181;
 }
 
 body {
-    overflow-x: hidden;
+    font-family: 'VT323', monospace;
+    font-size: 20px;
 }
 
-input::-webkit-search-cancel-button,
-input::-webkit-inner-spin-button,
-input::-webkit-clear-button {
-    display: none;
-    -webkit-appearance: none;
+.pixel-border {
+    border: 4px solid rgb(var(--c-border));
+    box-shadow: 0 0 0 2px rgb(var(--c-panel-light)), 0 4px 0 0 rgb(var(--c-border));
 }
 
-.form-control.is-invalid, .form-control {
-    background-image: none !important;
-}
+[x-cloak] { display: none !important; }

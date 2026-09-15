@@ -1,34 +1,16 @@
-@extends('tablar::page')
-
-@section('title', __('about.title'))
+@extends('layouts.retro')
 
 @section('content')
-    <div class="page-header d-print-none">
-        <div class="container-xl">
-            <div class="row g-2 align-items-center">
-                <div class="col">
-                    <h2 class="page-title">{{ __('about.title') }}</h2>
-                </div>
+    <h2 class="font-pixel text-sm text-retro-accent2 mb-6">{{ __('about.title') }}</h2>
+
+    <div class="pixel-border bg-retro-panel p-6 flex flex-col md:flex-row gap-6">
+        <div class="shrink-0 mx-auto md:mx-0">
+            <div class="pixel-border !border-2 inline-block">
+                <img src="{{ asset('storage/images/Profile.png') }}" alt="Profile" class="w-48 h-48 object-cover">
             </div>
         </div>
-    </div>
-    <div class="page-body">
-        <div class="container-xl">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-4 text-center">
-                            <img src="{{ asset('storage/images/Profile.png') }}"
-                                 alt="Profile"
-                                 class="img-fluid rounded mb-3"
-                                 style="max-width: 300px;">
-                        </div>
-                        <div class="col-md-8">
-                            {!! nl2br(e(__('about.content'))) !!}
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="font-mono text-lg leading-relaxed">
+            {!! nl2br(e(__('about.content'))) !!}
         </div>
     </div>
 @endsection

@@ -1,9 +1,9 @@
 <?php
 return [
     'dashboard' => 'Startseite',
-    'total_games' => 'Spiele Gesamt',
-    'total_tags' => 'Tags Gesamt',
-    'total_commits' => 'Änderungen Gesamt',
+    'total_games' => 'Spiele gesamt',
+    'total_tags' => 'Tags gesamt',
+    'total_commits' => 'Änderungen gesamt',
     'games_by_tag' => 'Spiele nach Tag',
     'latest_games' => 'Neueste Spiele',
     'title' => 'Titel',

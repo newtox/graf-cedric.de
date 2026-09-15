@@ -1,82 +1,52 @@
-@extends('tablar::page')
-
-@section('title', $game->title)
+@extends('layouts.retro')
 
 @section('content')
-    <div class="page-header d-print-none">
-        <div class="container-xl">
-            <div class="row g-2 align-items-center">
-                <div class="col">
-                    <h2 class="page-title">{{ $game->title }}</h2>
-                </div>
-            </div>
+    <a href="{{ url()->previous() ?: route('games.index') }}" class="text-sm text-retro-muted hover:text-retro-accent2 transition font-mono">&larr; {{ __('games.title') }}</a>
+
+    <div class="pixel-border bg-retro-panel mt-4 max-w-xl mx-auto overflow-hidden">
+        <div class="h-56 bg-white flex items-center justify-center"
+             style="background-image: url('{{ $game->thumbnail }}'); background-size: contain; background-repeat: no-repeat; background-position: center;">
         </div>
-    </div>
-    <div class="page-body">
-        <div class="container-xl">
-            <div class="card" style="max-width: 600px; margin: 0 auto;">
-                <div class="card-img-top img-responsive"
-                     style="background-image: url('{{ $game->thumbnail }}');
-                     background-size: contain;
-                     background-repeat: no-repeat;
-                     background-position: center;
-                     height: 200px;
-                     width: 100%;
-                     max-width: 400px;
-                     margin: 0 auto;">
-                </div>
-                <div class="card-body">
-                    <div class="mb-3">
-                        @foreach($game->tags as $tag)
-                            <span class="badge bg-{{ $tag->color }} text-bg-dark me-2">
-                                {{ $tag->name }}
-                            </span>
-                        @endforeach
-                    </div>
-                    <div class="row mb-3">
-                        @if($game->developer_name)
-                            <div class="col-md-6 mb-3">
-                                <div class="text-muted">{{ __('games.fields.developer_name') }}</div>
-                                <div class="d-flex align-items-center">
-                                    @if($game->developer_image)
-                                        <span class="avatar me-2"
-                                              style="background-image: url('{{ $game->developer_image }}');
-                                              background-size: contain;
-                                              background-repeat: no-repeat;
-                                              background-position: center;
-                                              height: 128px;
-                                              width: 128px;">
-                                        </span>
-                                    @endif
-                                    {{ $game->developer_name }}
+
+        <div class="p-6">
+            <h2 class="font-pixel text-sm text-retro-accent2 mb-4">{{ $game->title }}</h2>
+
+            <div class="flex flex-wrap gap-1 mb-6">
+                @foreach($game->tags as $tag)
+                    <span class="inline-block px-2 py-0.5 text-xs text-white font-pixel" style="background-color: {{ $tag->color_hex }}">
+                        {{ $tag->name }}
+                    </span>
+                @endforeach
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 font-mono text-lg">
+                @if($game->developer)
+                    <div>
+                        <p class="text-retro-muted text-sm font-pixel mb-2">{{ __('games.fields.developer_name') }}</p>
+                        <div class="flex items-center gap-3">
+                            @if($game->developer->image)
+                                <div class="w-16 h-16 bg-white pixel-border !border-2 flex items-center justify-center"
+                                     style="background-image: url('{{ $game->developer->image }}'); background-size: contain; background-repeat: no-repeat; background-position: center;">
                                 </div>
-                            </div>
-                        @endif
-                        @if($game->publisher_name)
-                            <div class="col-md-6 mb-3">
-                                <div class="text-muted">{{ __('games.fields.publisher_name') }}</div>
-                                <div class="d-flex align-items-center">
-                                    @if($game->publisher_image)
-                                        <span class="avatar me-2"
-                                              style="background-image: url('{{ $game->publisher_image }}');
-                                              background-size: contain;
-                                              background-repeat: no-repeat;
-                                              background-position: center;
-                                              height: 128px;
-                                              width: 128px;">
-                                        </span>
-                                    @endif
-                                    {{ $game->publisher_name }}
-                                </div>
-                            </div>
-                        @endif
+                            @endif
+                            <span>{{ $game->developer->name }}</span>
+                        </div>
                     </div>
-                </div>
-                <div class="card-footer">
-                    <a href="{{ url()->previous() ?: route('games.index') }}" class="btn btn-secondary me-2">
-                        <i class="ti ti-arrow-back me-2"></i>
-                    </a>
-                </div>
+                @endif
+
+                @if($game->publisher)
+                    <div>
+                        <p class="text-retro-muted text-sm font-pixel mb-2">{{ __('games.fields.publisher_name') }}</p>
+                        <div class="flex items-center gap-3">
+                            @if($game->publisher->image)
+                                <div class="w-16 h-16 bg-white pixel-border !border-2 flex items-center justify-center"
+                                     style="background-image: url('{{ $game->publisher->image }}'); background-size: contain; background-repeat: no-repeat; background-position: center;">
+                                </div>
+                            @endif
+                            <span>{{ $game->publisher->name }}</span>
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

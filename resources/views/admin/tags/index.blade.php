@@ -1,83 +1,135 @@
-@extends('tablar::page')
-
-@section('title', __('tags.title'))
+@extends('layouts.retro')
 
 @section('content')
-    <div class="page-header d-print-none">
-        <div class="container-xl">
-            <div class="row g-2 align-items-center">
-                <div class="col">
-                    <h2 class="page-title">{{ __('tags.title') }}</h2>
+    <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+        <h2 class="font-pixel text-sm text-retro-accent2">{{ __('tags.title') }}</h2>
+        @can('create tags')
+            <a href="{{ route('admin.tags.create') }}" class="pixel-border !border-2 px-4 py-2 font-pixel text-xs bg-retro-accent text-white">
+                + {{ __('tags.create') }}
+            </a>
+        @endcan
+    </div>
+
+    <div class="sm:hidden space-y-3">
+        @forelse($tags as $tag)
+            <div class="pixel-border bg-retro-panel p-3" x-data="{ confirmingDelete: false }">
+                <div class="flex items-center justify-between mb-3">
+                    <span class="inline-flex items-center gap-2 font-mono text-lg">
+                        <span class="inline-block w-4 h-4 rounded-full shrink-0" style="background-color: {{ $tag->color_hex }}"></span>
+                        {{ $tag->name }}
+                    </span>
                 </div>
-                @can('create tags')
-                    <div class="col-auto ms-auto">
-                        <a href="{{ route('admin.tags.create') }}" class="btn btn-primary me-2">
-                            <i class="ti ti-plus me-2"></i>
-                            {{ __('tags.create') }}
+                <div class="flex gap-2">
+                    @can('edit tags')
+                        <a href="{{ route('admin.tags.edit', $tag) }}"
+                           class="flex-1 flex items-center justify-center gap-2 pixel-border !border-2 px-3 py-2 font-pixel text-xs bg-retro-panelLight text-retro-text">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                            {{ __('tags.edit') }}
                         </a>
+                    @endcan
+                    @can('delete tags')
+                        <form id="delete-tag-form-m-{{ $tag->id }}" action="{{ route('admin.tags.destroy', $tag) }}" method="POST" class="hidden">
+                            @csrf
+                            @method('DELETE')
+                        </form>
+                        <button type="button" @click="confirmingDelete = true"
+                            class="flex-1 flex items-center justify-center gap-2 pixel-border !border-2 px-3 py-2 font-pixel text-xs bg-red-900 text-red-100">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+                            {{ __('common.delete') }}
+                        </button>
+                    @endcan
+                </div>
+
+                <div x-show="confirmingDelete" x-cloak
+                     class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 px-4"
+                     @click.self="confirmingDelete = false">
+                    <div class="pixel-border bg-retro-panel p-6 max-w-sm w-full text-center">
+                        <p class="font-pixel text-xs text-retro-accent2 mb-2">{{ __('common.confirm_delete_title') }}</p>
+                        <p class="font-mono text-lg text-retro-muted mb-4">{{ __('common.confirm_delete_text') }}</p>
+                        <div class="flex gap-3 justify-center">
+                            <button type="button" @click="confirmingDelete = false" class="pixel-border !border-2 px-4 py-2 font-pixel text-xs bg-retro-panelLight text-retro-text">
+                                {{ __('common.cancel') }}
+                            </button>
+                            <button type="button" @click="document.getElementById('delete-tag-form-m-{{ $tag->id }}').submit()" class="pixel-border !border-2 px-4 py-2 font-pixel text-xs bg-red-700 text-white">
+                                {{ __('common.delete') }}
+                            </button>
+                        </div>
                     </div>
-                @endcan
+                </div>
             </div>
+        @empty
+            <p class="text-center text-retro-muted font-mono text-lg py-6">{{ __('common.no_results') }}</p>
+        @endforelse
+    </div>
+
+    <div class="hidden sm:block pixel-border bg-retro-panel"><div class="overflow-x-auto">
+        <table class="w-full font-mono text-lg">
+            <thead>
+                <tr class="text-left text-retro-accent2 bg-retro-border font-pixel text-xs">
+                    <th class="p-3">{{ __('tags.fields.name') }}</th>
+                    <th class="p-3">{{ __('tags.fields.color') }}</th>
+                    <th class="p-3"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($tags as $tag)
+                    <tr class="border-b border-retro-border/50" x-data="{ confirmingDelete: false }">
+                        <td class="p-3">{{ $tag->name }}</td>
+                        <td class="p-3">
+                            <span class="inline-flex items-center gap-2">
+                                <span class="inline-block w-4 h-4 rounded-full" style="background-color: {{ $tag->color_hex }}"></span>
+                                {{ $tag->color }}
+                            </span>
+                        </td>
+                        <td class="p-3">
+                            <div class="flex gap-2">
+                                @can('edit tags')
+                                    <a href="{{ route('admin.tags.edit', $tag) }}" title="{{ __('tags.edit') }}"
+                                       class="w-10 h-10 flex items-center justify-center pixel-border !border-2 bg-retro-panelLight text-retro-text hover:opacity-80 transition">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                                    </a>
+                                @endcan
+                                @can('delete tags')
+                                    <form id="delete-tag-form-{{ $tag->id }}" action="{{ route('admin.tags.destroy', $tag) }}" method="POST" class="hidden">
+                                        @csrf
+                                        @method('DELETE')
+                                    </form>
+                                    <button type="button" @click="confirmingDelete = true" title="{{ __('common.delete') }}"
+                                        class="w-10 h-10 flex items-center justify-center pixel-border !border-2 bg-red-900 text-red-100 hover:opacity-80 transition">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+                                    </button>
+                                @endcan
+                            </div>
+
+                            <div x-show="confirmingDelete" x-cloak
+                                 class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 px-4"
+                                 @click.self="confirmingDelete = false">
+                                <div class="pixel-border bg-retro-panel p-6 max-w-sm w-full text-center">
+                                    <p class="font-pixel text-xs text-retro-accent2 mb-2">{{ __('common.confirm_delete_title') }}</p>
+                                    <p class="font-mono text-lg text-retro-muted mb-4">{{ __('common.confirm_delete_text') }}</p>
+                                    <div class="flex gap-3 justify-center">
+                                        <button type="button" @click="confirmingDelete = false" class="pixel-border !border-2 px-4 py-2 font-pixel text-xs bg-retro-panelLight text-retro-text">
+                                            {{ __('common.cancel') }}
+                                        </button>
+                                        <button type="button" @click="document.getElementById('delete-tag-form-{{ $tag->id }}').submit()" class="pixel-border !border-2 px-4 py-2 font-pixel text-xs bg-red-700 text-white">
+                                            {{ __('common.delete') }}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="3" class="p-6 text-center text-retro-muted font-mono text-lg">{{ __('common.no_results') }}</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
         </div>
     </div>
-    <div class="page-body">
-        <div class="container-xl">
-            <div class="card">
-                <div class="table-responsive">
-                    <table class="table table-vcenter card-table">
-                        <thead>
-                        <tr>
-                            <th>{{ __('tags.fields.name') }}</th>
-                            <th>{{ __('tags.fields.color') }}</th>
-                            <th class="w-1"></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @forelse($tags as $tag)
-                            <tr>
-                                <td>{{ $tag->name }}</td>
-                                <td>
-                                    <span class="badge bg-{{ $tag->color }} text-bg-dark me-2">{{ $tag->color }}</span>
-                                </td>
-                                <td>
-                                    <div class="btn-list flex-nowrap">
-                                        @can('edit tags')
-                                            <a href="{{ route('admin.tags.edit', $tag) }}"
-                                               class="btn btn-icon btn-primary me-2">
-                                                <i class="ti ti-edit"></i>
-                                            </a>
-                                        @endcan
-                                        @can('delete tags')
-                                            <form action="{{ route('admin.tags.destroy', $tag) }}"
-                                                  method="POST"
-                                                  onsubmit="return confirm('Sure?');"
-                                                  class="d-inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-icon btn-danger me-2">
-                                                    <i class="ti ti-trash"></i>
-                                                </button>
-                                            </form>
-                                        @endcan
-                                    </div>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="4" class="text-center py-4">
-                                    ...
-                                </td>
-                            </tr>
-                        @endforelse
-                        </tbody>
-                    </table>
-                </div>
-                @if($tags->hasPages())
-                    <div class="card-footer pb-0">
-                        {{ $tags->links() }}
-                    </div>
-                @endif
-            </div>
-        </div>
+
+    <div class="mt-4">
+        {{ $tags->links() }}
     </div>
 @endsection

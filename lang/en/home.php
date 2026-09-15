@@ -7,7 +7,7 @@ return [
     'games_by_tag' => 'Games by Tag',
     'latest_games' => 'Latest Games',
     'title' => 'Title',
-    'developer_name' => 'Developer Name',
+    'developer_name' => 'Developer',
     'tags' => 'Tags',
     'entries' => 'Entries'
 ];
