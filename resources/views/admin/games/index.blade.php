@@ -7,8 +7,8 @@
         <div class="flex flex-wrap items-center gap-2">
             <form action="{{ route('admin.games.index') }}" method="GET" class="flex flex-wrap items-center gap-2">
                 <input type="text" name="search" value="{{ request('search') }}"
-                    placeholder="{{ __('games.fields.search') }}" title="{{ __('games.fields.search') }}"
-                    class="bg-retro-bg border-2 border-retro-border text-retro-text font-mono text-lg p-2 w-40 sm:w-48">
+                       placeholder="{{ __('games.fields.search') }}" title="{{ __('games.fields.search') }}"
+                       class="bg-retro-bg border-2 border-retro-border text-retro-text font-mono text-lg p-2 w-40 sm:w-48">
 
                 <div x-data="{ open: false }" class="relative">
                     <button type="button" @click="open = !open"
@@ -56,48 +56,31 @@
                 @if($game->tags->isNotEmpty())
                     <div class="flex flex-wrap gap-1 mb-3">
                         @foreach($game->tags as $tag)
-                            <span class="inline-block px-2 py-0.5 text-xs text-white font-pixel" style="background-color: {{ $tag->color_hex }}">{{ $tag->name }}</span>
+                            <x-tag-badge :tag="$tag" />
                         @endforeach
                     </div>
                 @endif
 
                 <div class="flex gap-2">
                     @can('edit games')
-                        <a href="{{ route('admin.games.edit', $game) }}"
-                           class="flex-1 flex items-center justify-center gap-2 pixel-border !border-2 px-3 py-2 font-pixel text-xs bg-retro-panelLight text-retro-text">
+                        <x-icon-action-button :href="route('admin.games.edit', $game)" :label="__('games.edit')" class="flex-1">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
                             {{ __('games.edit') }}
-                        </a>
+                        </x-icon-action-button>
                     @endcan
                     @can('delete games')
                         <form id="delete-game-form-m-{{ $game->id }}" action="{{ route('admin.games.destroy', $game) }}" method="POST" class="hidden">
                             @csrf
                             @method('DELETE')
                         </form>
-                        <button type="button" @click="confirmingDelete = true"
-                                class="flex-1 flex items-center justify-center gap-2 pixel-border !border-2 px-3 py-2 font-pixel text-xs bg-red-900 text-red-100">
+                        <x-icon-action-button variant="danger" :label="__('common.delete')" class="flex-1" @click="confirmingDelete = true">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
                             {{ __('common.delete') }}
-                        </button>
+                        </x-icon-action-button>
                     @endcan
                 </div>
 
-                <div x-show="confirmingDelete" x-cloak
-                     class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 px-4"
-                     @click.self="confirmingDelete = false">
-                    <div class="pixel-border bg-retro-panel p-6 max-w-sm w-full text-center">
-                        <p class="font-pixel text-xs text-retro-accent2 mb-2">{{ __('common.confirm_delete_title') }}</p>
-                        <p class="font-mono text-lg text-retro-muted mb-4">{{ __('common.confirm_delete_text') }}</p>
-                        <div class="flex gap-3 justify-center">
-                            <button type="button" @click="confirmingDelete = false" class="pixel-border !border-2 px-4 py-2 font-pixel text-xs bg-retro-panelLight text-retro-text">
-                                {{ __('common.cancel') }}
-                            </button>
-                            <button type="button" @click="document.getElementById('delete-game-form-m-{{ $game->id }}').submit()" class="pixel-border !border-2 px-4 py-2 font-pixel text-xs bg-red-700 text-white">
-                                {{ __('common.delete') }}
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                <x-confirm-modal show="confirmingDelete" onConfirm="document.getElementById('delete-game-form-m-{{ $game->id }}').submit()" />
             </div>
         @empty
             <p class="text-center text-retro-muted font-mono text-lg py-6">{{ __('common.no_results') }}</p>
@@ -143,47 +126,28 @@
                         </td>
                         <td class="p-3">
                             @foreach($game->tags as $tag)
-                                <span class="inline-block px-2 py-0.5 text-xs text-white font-pixel mr-1 mb-1" style="background-color: {{ $tag->color_hex }}">
-                                    {{ $tag->name }}
-                                </span>
+                                <x-tag-badge :tag="$tag" class="mr-1 mb-1" />
                             @endforeach
                         </td>
                         <td class="p-3">
                             <div class="flex gap-2">
                                 @can('edit games')
-                                    <a href="{{ route('admin.games.edit', $game) }}" title="{{ __('games.edit') }}"
-                                       class="w-10 h-10 flex items-center justify-center pixel-border !border-2 bg-retro-panelLight text-retro-text hover:opacity-80 transition">
+                                    <x-icon-action-button :href="route('admin.games.edit', $game)" :label="__('games.edit')">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                                    </a>
+                                    </x-icon-action-button>
                                 @endcan
                                 @can('delete games')
                                     <form id="delete-game-form-{{ $game->id }}" action="{{ route('admin.games.destroy', $game) }}" method="POST" class="hidden">
                                         @csrf
                                         @method('DELETE')
                                     </form>
-                                    <button type="button" @click="confirmingDelete = true" title="{{ __('common.delete') }}"
-                                            class="w-10 h-10 flex items-center justify-center pixel-border !border-2 bg-red-900 text-red-100 hover:opacity-80 transition">
+                                    <x-icon-action-button variant="danger" :label="__('common.delete')" @click="confirmingDelete = true">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
-                                    </button>
+                                    </x-icon-action-button>
                                 @endcan
                             </div>
 
-                            <div x-show="confirmingDelete" x-cloak
-                                 class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 px-4"
-                                 @click.self="confirmingDelete = false">
-                                <div class="pixel-border bg-retro-panel p-6 max-w-sm w-full text-center">
-                                    <p class="font-pixel text-xs text-retro-accent2 mb-2">{{ __('common.confirm_delete_title') }}</p>
-                                    <p class="font-mono text-lg text-retro-muted mb-4">{{ __('common.confirm_delete_text') }}</p>
-                                    <div class="flex gap-3 justify-center">
-                                        <button type="button" @click="confirmingDelete = false" class="pixel-border !border-2 px-4 py-2 font-pixel text-xs bg-retro-panelLight text-retro-text">
-                                            {{ __('common.cancel') }}
-                                        </button>
-                                        <button type="button" @click="document.getElementById('delete-game-form-{{ $game->id }}').submit()" class="pixel-border !border-2 px-4 py-2 font-pixel text-xs bg-red-700 text-white">
-                                            {{ __('common.delete') }}
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
+                            <x-confirm-modal show="confirmingDelete" onConfirm="document.getElementById('delete-game-form-{{ $game->id }}').submit()" />
                         </td>
                     </tr>
                 @empty

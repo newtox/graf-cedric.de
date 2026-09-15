@@ -33,14 +33,27 @@ class RolesAndPermissionsSeeder extends Seeder
         $editor = Role::create(['name' => 'Editor']);
 
         $admin->givePermissionTo([
-            $viewGames, $createGames, $editGames, $deleteGames,
-            $viewTags, $createTags, $editTags, $deleteTags,
-            $viewUsers, $createUsers, $editUsers, $deleteUsers
+            $viewGames,
+            $createGames,
+            $editGames,
+            $deleteGames,
+            $viewTags,
+            $createTags,
+            $editTags,
+            $deleteTags,
+            $viewUsers,
+            $createUsers,
+            $editUsers,
+            $deleteUsers
         ]);
 
         $editor->givePermissionTo([
-            $viewGames, $createGames, $editGames,
-            $viewTags, $createTags, $editTags
+            $viewGames,
+            $createGames,
+            $editGames,
+            $viewTags,
+            $createTags,
+            $editTags
         ]);
     }
 }

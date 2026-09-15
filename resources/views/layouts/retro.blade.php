@@ -130,7 +130,7 @@
                 </span>
                 <span class="hidden sm:inline">&middot;</span>
                 <a href="https://github.com/newtox/graf-cedric.de" class="text-retro-accent2 hover:underline">
-                    v1.0 beta
+                    v2.1 beta
                 </a>
             </div>
         </footer>

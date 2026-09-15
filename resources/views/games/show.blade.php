@@ -16,9 +16,7 @@
 
             <div class="flex flex-wrap gap-1 mb-6">
                 @foreach($game->tags as $tag)
-                    <span class="inline-block px-2 py-0.5 text-xs text-white font-pixel" style="background-color: {{ $tag->color_hex }}">
-                        {{ $tag->name }}
-                    </span>
+                    <x-tag-badge :tag="$tag" />
                 @endforeach
             </div>
 

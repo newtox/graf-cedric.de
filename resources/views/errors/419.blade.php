@@ -1,0 +1,1 @@
+<x-error-layout code="419" title="{{ __('errors.error_419_title') }}" text="{{ __('errors.error_419_text') }}" />

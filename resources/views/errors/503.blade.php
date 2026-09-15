@@ -1,0 +1,1 @@
+<x-error-layout code="503" title="{{ __('errors.error_503_title') }}" text="{{ __('errors.error_503_text') }}" />
