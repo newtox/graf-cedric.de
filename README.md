@@ -16,13 +16,13 @@ Welcome to the **Graf-Cedric.de** repository! This is a Laravel-based web applic
 ## Overview
 
 - **Functionality**: A robust game management system with user roles, permissions, and a clean admin interface
-- **Technology**: Built with Laravel 10, Tailwind CSS and Alpine.js — custom retro pixel-art theme with sidebar navigation
+- **Technology**: Built with Laravel 13, Tailwind CSS and Alpine.js — custom retro pixel-art theme with sidebar navigation
 
 ## How to Use
 
 ### Prerequisites
 
-- **PHP 8.1+**: Ensure PHP is installed with required extensions
+- **PHP 8.4+**: Ensure PHP is installed with required extensions
 - **Composer**: For PHP dependency management
 - **Node.js & NPM**: For frontend asset compilation
 - **MySQL/MariaDB**: For database management
@@ -30,43 +30,39 @@ Welcome to the **Graf-Cedric.de** repository! This is a Laravel-based web applic
 ### Installation
 
 1. **Clone this repository**:
-   ```bash
-   git clone https://github.com/newtox/graf-cedric.de.git
-   cd graf-cedric.de
-   ```
+```bash
+git clone https://github.com/newtox/graf-cedric.de.git
+cd graf-cedric.de
+```
 
 2. **Setup**:
-   - Create a `.env` file based on the provided `.env.example`. Copy the content from:
-     ```plaintext
+- Create a `.env` file based on the provided `.env.example`. Copy the content from:
+```plaintext
      .env.example
-     ```
-     
-   - Configure your database and application settings in `.env`
+```
+- Configure your database and application settings in `.env`
 
 3. **Install Dependencies**:
-   
    composer install
    npm install
-   
 
 4. **Application Setup**:
-   
    php artisan key:generate
    php artisan migrate --seed
    php artisan storage:link
    npm run build
-   
 
 ### Core Dependencies
 
 #### Backend (composer.json):
-- **Laravel Framework**: ^10.0
-- **Laravel Sanctum**: ^3.2
-- **Laravel UI**: ^4.6
+- **Laravel Framework**: ^13.10
+- **Laravel Sanctum**: ^4.0
 - **Spatie Laravel Permission**: ^6.10
 
+Authentication (login/logout only) is handled by a lightweight, self-maintained controller set in `app/Http/Controllers/Auth/` and `routes/auth.php`, following the same conventions Laravel Breeze scaffolds. There is no public registration, password reset, or email verification — accounts are created and managed manually via the admin panel.
+
 #### Frontend (package.json):
-- **Tailwind CSS**: ^3.0
+- **Tailwind CSS**: ^3.4
 - **Alpine.js**: ^3.17
 - **Vite**: ^4.0.0
 
@@ -74,6 +70,7 @@ Welcome to the **Graf-Cedric.de** repository! This is a Laravel-based web applic
 
 - Access the application at http://127.0.0.1:8000/login
 - Login using the provided credentials (admin@example.com, password)
+- Manage users, roles, and passwords under `/admin/users` — there is no public registration
 
 ## Contributing
 

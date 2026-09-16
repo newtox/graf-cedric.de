@@ -14,7 +14,7 @@
       {
         devShells.default = pkgs.mkShell {
           buildInputs = with pkgs; [
-            (php83.override {
+            (php84.override {
               extensions = { all, enabled }: with all; enabled ++ [
                 pdo
                 pdo_mysql
@@ -31,7 +31,7 @@
                 tokenizer
               ];
             })
-            php83Packages.composer
+            php84Packages.composer
             nodejs_22
             vscodium
           ];

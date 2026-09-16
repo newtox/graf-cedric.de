@@ -6,11 +6,8 @@ return [
     'show' => 'Spieldetails',
     'fields' => [
         'title' => 'Titel',
-        'slug' => 'Slug',
         'developer_name' => 'Entwickler',
-        'developer_image' => 'Entwickler Bild',
         'publisher_name' => 'Publisher',
-        'publisher_image' => 'Publisher Bild',
         'thumbnail' => 'Vorschaubild',
         'use_existing' => 'Bestehenden nutzen',
         'add_new' => 'Neuen anlegen',

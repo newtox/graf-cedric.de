@@ -8,12 +8,6 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LanguageController;
 use Illuminate\Support\Facades\Route;
 
-Auth::routes([
-    'register' => false,
-    'verify' => false,
-    'reset' => false,
-]);
-
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/language/{locale}', [LanguageController::class, 'switch'])->name('language.switch');
@@ -56,3 +50,5 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
         Route::delete('/{user}', 'destroy')->name('destroy');
     });
 });
+
+require __DIR__ . '/auth.php';
