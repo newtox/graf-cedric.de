@@ -71,6 +71,7 @@ Authentication (login/logout only) is handled by a lightweight, self-maintained 
 - Access the application at http://127.0.0.1:8000/login
 - Login using the provided credentials (admin@example.com, password)
 - Manage users, roles, and passwords under `/admin/users` — there is no public registration
+- Manage companies (developers/publishers) and their logos under `/admin/companies`
 
 ## Contributing
 
