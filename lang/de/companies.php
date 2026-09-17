@@ -5,6 +5,7 @@ return [
     'edit' => 'Firma bearbeiten',
     'fields' => [
         'name' => 'Name',
+        'search' => 'Nach Firma suchen... drücke \'Enter\' zum suchen',
         'image' => 'Logo',
         'image_hint' => 'Leer lassen, um das aktuelle Logo beizubehalten',
         'games_as_developer' => 'Als Entwickler',

@@ -5,6 +5,7 @@ return [
     'edit' => 'Edit Company',
     'fields' => [
         'name' => 'Name',
+        'search' => "Search by company name... press 'Enter' to search",
         'image' => 'Logo',
         'image_hint' => 'Leave blank to keep the current logo',
         'games_as_developer' => 'As Developer',

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CompanyRequest;
 use App\Models\Company;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
@@ -19,11 +20,15 @@ class CompanyController extends Controller
         $this->middleware('permission:delete companies')->only('destroy');
     }
 
-    public function index(): View
+    public function index(Request $request): View
     {
-        $companies = Company::withCount(['gamesAsDeveloper', 'gamesAsPublisher'])
-            ->orderBy('name')
-            ->paginate(15);
+        $query = Company::withCount(['gamesAsDeveloper', 'gamesAsPublisher']);
+
+        if ($request->filled('search')) {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
+
+        $companies = $query->orderBy('name')->paginate(15)->withQueryString();
 
         return view('admin.companies.index', compact('companies'));
     }
