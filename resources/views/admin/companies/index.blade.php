@@ -3,11 +3,20 @@
 @section('content')
     <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
         <h2 class="font-pixel text-sm text-retro-accent2">{{ __('companies.title') }}</h2>
-        @can('create companies')
-            <a href="{{ route('admin.companies.create') }}" class="pixel-border !border-2 px-4 py-2 font-pixel text-xs bg-retro-accent text-white">
-                + {{ __('companies.create') }}
-            </a>
-        @endcan
+
+        <div class="flex flex-wrap items-center gap-2">
+            <form action="{{ route('admin.companies.index') }}" method="GET">
+                <input type="text" name="search" value="{{ request('search') }}"
+                       placeholder="{{ __('companies.fields.search') }}" title="{{ __('companies.fields.search') }}"
+                       class="bg-retro-bg border-2 border-retro-border text-retro-text font-mono text-lg p-2 w-40 sm:w-48">
+            </form>
+
+            @can('create companies')
+                <a href="{{ route('admin.companies.create') }}" class="pixel-border !border-2 px-4 py-2 font-pixel text-xs bg-retro-accent text-white whitespace-nowrap">
+                    + {{ __('companies.create') }}
+                </a>
+            @endcan
+        </div>
     </div>
 
     <div class="sm:hidden space-y-3">
