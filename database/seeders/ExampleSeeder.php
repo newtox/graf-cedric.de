@@ -19,7 +19,6 @@ class ExampleSeeder extends Seeder
 
         $adminUser->assignRole('Admin');
 
-        /*
         $tags = Tag::factory(5)->create();
 
         Game::factory(20)->create()->each(function ($game) use ($tags) {
@@ -27,6 +26,5 @@ class ExampleSeeder extends Seeder
                 $tags->random(rand(1, 3))->pluck('id')->toArray()
             );
         });
-        */
     }
 }
