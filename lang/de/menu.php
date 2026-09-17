@@ -10,4 +10,5 @@ return [
     'logout' => 'Abmelden',
     'menu' => 'Menü',
     'users_management' => 'Benutzer-Verwaltung',
+    'companies_management' => 'Firmen-Verwaltung',
 ];

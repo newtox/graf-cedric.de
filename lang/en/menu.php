@@ -10,4 +10,5 @@ return [
     'logout' => 'Logout',
     'menu' => 'Menu',
     'users_management' => 'Users Management',
+    'companies_management' => 'Companies Management',
 ];

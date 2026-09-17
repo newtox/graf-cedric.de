@@ -14,6 +14,11 @@ class RolesAndPermissionsSeeder extends Seeder
     {
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
+        $viewCompanies = Permission::create(['name' => 'view companies']);
+        $createCompanies = Permission::create(['name' => 'create companies']);
+        $editCompanies = Permission::create(['name' => 'edit companies']);
+        $deleteCompanies = Permission::create(['name' => 'delete companies']);
+
         $viewGames = Permission::create(['name' => 'view games']);
         $createGames = Permission::create(['name' => 'create games']);
         $editGames = Permission::create(['name' => 'edit games']);
@@ -33,6 +38,10 @@ class RolesAndPermissionsSeeder extends Seeder
         $editor = Role::create(['name' => 'Editor']);
 
         $admin->givePermissionTo([
+            $viewCompanies,
+            $createCompanies,
+            $editCompanies,
+            $deleteCompanies,
             $viewGames,
             $createGames,
             $editGames,
@@ -48,6 +57,9 @@ class RolesAndPermissionsSeeder extends Seeder
         ]);
 
         $editor->givePermissionTo([
+            $viewCompanies,
+            $createCompanies,
+            $editCompanies,
             $viewGames,
             $createGames,
             $editGames,

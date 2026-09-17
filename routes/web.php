@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\Admin\GameController as AdminGameController;
@@ -23,6 +24,15 @@ Route::controller(GameController::class)
     });
 
 Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
+    Route::prefix('companies')->name('companies.')->controller(CompanyController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
+        Route::get('/{company}/edit', 'edit')->name('edit');
+        Route::put('/{company}', 'update')->name('update');
+        Route::delete('/{company}', 'destroy')->name('destroy');
+    });
+
     Route::prefix('games')->name('games.')->controller(AdminGameController::class)->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/create', 'create')->name('create');

@@ -86,6 +86,16 @@
                 </a>
 
                 @auth
+                    @can('view companies')
+                        <a href="{{ route('admin.companies.index') }}" title="{{ __('menu.companies_management') }}"
+                           class="flex flex-col items-center gap-1 w-16 group">
+                            <span class="w-12 h-12 pixel-border !border-2 flex items-center justify-center bg-retro-panelLight text-retro-text group-hover:bg-retro-accent group-hover:text-white transition">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="14" rx="1"/><path d="M8 7V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v3"/><line x1="3" y1="12" x2="21" y2="12"/></svg>
+                            </span>
+                            <span class="font-pixel text-[8px] text-retro-text text-center leading-tight hidden sm:block break-words w-full">{{ __('menu.companies_management') }}</span>
+                        </a>
+                    @endcan
+
                     <a href="{{ route('admin.games.index') }}" title="{{ __('menu.games_management') }}"
                        class="flex flex-col items-center gap-1 w-16 group">
                         <span class="w-12 h-12 pixel-border !border-2 flex items-center justify-center bg-retro-panelLight text-retro-text group-hover:bg-retro-accent group-hover:text-white transition">
