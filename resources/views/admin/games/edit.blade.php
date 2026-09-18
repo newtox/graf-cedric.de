@@ -19,7 +19,7 @@
             @if($game->thumbnail)
                 <img src="{{ $game->thumbnail }}" class="w-16 h-16 object-contain pixel-border !border-2 bg-retro-panelLight mb-2">
             @endif
-            <input type="file" name="thumbnail" accept="image/*" class="w-full text-sm font-mono text-retro-text">
+            <input type="file" name="thumbnail" accept="image/*" class="w-full font-mono text-sm text-retro-muted file:mr-3 file:py-2 file:px-3 file:border-0 file:pixel-border file:!border-2 file:bg-retro-panelLight file:text-retro-text file:font-pixel file:text-xs">
             @error('thumbnail') <p class="text-red-400 font-mono text-sm mt-1">{{ $message }}</p> @enderror
         </div>
 

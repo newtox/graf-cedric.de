@@ -42,7 +42,7 @@
                value="{{ old($prefix.'_name') }}"
                class="w-full bg-retro-bg border-2 border-retro-border text-retro-text font-mono text-lg p-2">
         <input type="file" name="{{ $prefix }}_image" accept="image/*"
-               class="w-full text-sm font-mono text-retro-text">
+               class="w-full font-mono text-sm text-retro-muted file:mr-3 file:py-2 file:px-3 file:border-0 file:pixel-border file:!border-2 file:bg-retro-panelLight file:text-retro-text file:font-pixel file:text-xs">
     </div>
 
     <div x-show="mode === 'existing'">

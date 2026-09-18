@@ -15,7 +15,7 @@
 
         <div class="mb-4">
             <label class="font-pixel text-xs text-retro-accent2 block mb-2">{{ __('games.fields.thumbnail') }}</label>
-            <input type="file" name="thumbnail" accept="image/*" class="w-full text-sm font-mono text-retro-text">
+            <input type="file" name="thumbnail" accept="image/*" class="w-full font-mono text-sm text-retro-muted file:mr-3 file:py-2 file:px-3 file:border-0 file:pixel-border file:!border-2 file:bg-retro-panelLight file:text-retro-text file:font-pixel file:text-xs">
             @error('thumbnail') <p class="text-red-400 font-mono text-sm mt-1">{{ $message }}</p> @enderror
         </div>
 
