@@ -29,17 +29,7 @@ class GameController extends Controller
         }
 
         $games = $query->paginate(12)->withQueryString();
-        $tags = Tag::orderByRaw("
-        CASE
-            WHEN name LIKE 'Alpha%' THEN 1
-            WHEN name LIKE 'Beta%' THEN 2
-            WHEN name LIKE 'Games%' THEN 3
-            WHEN name LIKE 'Hardware%' THEN 4
-            WHEN name LIKE 'Software%' THEN 5
-            ELSE 6
-        END,
-        name ASC
-        ")->get();
+        $tags = Tag::all();
 
         if ($request->ajax()) {
             return view('games.partials.game-cards', compact('games'));

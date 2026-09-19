@@ -12,25 +12,13 @@ class HomeController extends Controller
     public function index(): View
     {
         $commitCount = (int) env('TOTAL_COMMITS', 0);
-
         $stats = [
             'total_games' => Game::count(),
             'total_tags' => Tag::count(),
             'total_commits' => $commitCount,
             'latest_games' => Game::with(['tags', 'developer'])->latest()->take(5)->get(),
-            'games_by_tag' => Tag::withCount('games')->orderByRaw("
-                CASE
-                    WHEN name LIKE 'Alpha%' THEN 1
-                    WHEN name LIKE 'Beta%' THEN 2
-                    WHEN name LIKE 'Games%' THEN 3
-                    WHEN name LIKE 'Hardware%' THEN 4
-                    WHEN name LIKE 'Software%' THEN 5
-                    ELSE 6
-                END,
-                name ASC
-            ")->get()
+            'games_by_tag' => Tag::withCount('games')->get(),
         ];
-
         return view('home', compact('stats'));
     }
 }
