@@ -4,6 +4,7 @@ return [
     'create' => 'Spiel erstellen',
     'edit' => 'Spiel bearbeiten',
     'show' => 'Spieldetails',
+    'meta_description' => 'Durchsuchbare Übersicht aller von Graf Cedric von Leuchtenberg getesteten Spiele – filterbar nach Tags, mit Entwickler- und Publisher-Infos.',
     'fields' => [
         'title' => 'Titel',
         'developer_name' => 'Entwickler',

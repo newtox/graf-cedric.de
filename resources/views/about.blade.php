@@ -1,5 +1,8 @@
 @extends('layouts.retro')
 
+@section('title', __('menu.about'))
+@section('meta_description', __('about.tagline'))
+
 @section('content')
     <h2 class="font-pixel text-sm text-retro-accent2 mb-6">{{ __('about.title') }}</h2>
 

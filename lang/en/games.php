@@ -4,6 +4,7 @@ return [
     'create' => 'Create Game',
     'edit' => 'Edit Game',
     'show' => 'Game Details',
+    'meta_description' => 'Searchable overview of all games tested by Graf Cedric von Leuchtenberg – filterable by tags, with developer and publisher info.',
     'fields' => [
         'title' => 'Title',
         'developer_name' => 'Developer',

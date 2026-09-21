@@ -1,5 +1,8 @@
 @extends('layouts.retro')
 
+@section('title', __('menu.public_games'))
+@section('meta_description', __('games.meta_description'))
+
 @section('content')
     <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
         <h2 class="font-pixel text-sm text-retro-accent2">{{ __('games.title') }}</h2>

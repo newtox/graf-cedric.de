@@ -1,6 +1,9 @@
 @extends('layouts.retro')
 
 @section('content')
+@push('head')
+    <meta name="robots" content="noindex, nofollow">
+@endpush
     <div class="max-w-sm mx-auto">
         <h2 class="font-pixel text-sm text-retro-accent2 mb-6 text-center">{{ __('auth_pages.login_title') }}</h2>
 

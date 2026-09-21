@@ -20,6 +20,12 @@
 
     <link rel="icon" href="{{ asset('storage/images/Profile.png') }}">
 
+    @auth
+        <meta name="robots" content="noindex, nofollow">
+    @endauth
+
+    @stack('head')
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-retro-bg text-retro-text min-h-screen">
