@@ -9,7 +9,6 @@ use App\Models\Game;
 use App\Models\Tag;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class GameController extends Controller
@@ -58,7 +57,6 @@ class GameController extends Controller
 
         $game = Game::create([
             'title' => $validated['title'],
-            'slug' => Str::slug($validated['title']),
             'developer_company_id' => $this->resolveCompanyId($request, 'developer'),
             'publisher_company_id' => $this->resolveCompanyId($request, 'publisher'),
         ]);

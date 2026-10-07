@@ -3,6 +3,10 @@
 @section('title', $game->title)
 @section('meta_description', $game->title . ' — ' . $game->tags->pluck('name')->implode(', '))
 
+@if($game->thumbnail)
+    @section('og_image', $game->thumbnail)
+@endif
+
 @section('content')
     <a href="{{ url()->previous() ?: route('games.index') }}" class="text-sm text-retro-muted hover:text-retro-accent2 transition font-mono">&larr; {{ __('games.title') }}</a>
 

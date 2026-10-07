@@ -10,13 +10,13 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="@yield('title', __('menu.dashboard')) &mdash; Graf Cedric">
     <meta property="og:description" content="@yield('meta_description', __('about.tagline'))">
-    <meta property="og:image" content="{{ asset('storage/images/Profile.png') }}">
+    <meta property="og:image" content="@yield('og_image', asset('storage/images/Profile.png'))">
     <meta property="og:url" content="{{ url()->current() }}">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="@yield('title', __('menu.dashboard')) &mdash; Graf Cedric">
     <meta name="twitter:description" content="@yield('meta_description', __('about.tagline'))">
-    <meta name="twitter:image" content="{{ asset('storage/images/Profile.png') }}">
+    <meta name="twitter:image" content="@yield('og_image', asset('storage/images/Profile.png'))">
 
     <link rel="icon" href="{{ asset('storage/images/Profile.png') }}">
 

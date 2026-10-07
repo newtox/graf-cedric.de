@@ -7,6 +7,8 @@ use App\Http\Controllers\Admin\GameController as AdminGameController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LanguageController;
+use App\Models\Game;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -20,7 +22,17 @@ Route::get('/about', function () {
 Route::controller(GameController::class)
     ->group(function () {
         Route::get('/games', 'index')->name('games.index');
-        Route::get('/games/{game}', 'show')->name('games.show');
+        Route::get('/games/{game:slug}', 'show')
+            ->name('games.show')
+            ->missing(function (Request $request) {
+                $value = $request->route('game');
+
+                if (ctype_digit((string) $value) && $game = Game::find($value)) {
+                    return redirect()->route('games.show', $game, 301);
+                }
+
+                abort(404);
+            });
     });
 
 Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {

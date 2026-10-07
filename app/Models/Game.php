@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Str;
 
 class Game extends Model
 {
@@ -26,6 +27,29 @@ class Game extends Model
         static::addGlobalScope('ordered', function ($query) {
             $query->orderBy('title');
         });
+
+        static::saving(function (Game $game) {
+            if ($game->isDirty('title') || empty($game->slug)) {
+                $game->slug = static::uniqueSlug($game->title, $game->id);
+            }
+        });
+    }
+
+    public static function uniqueSlug(string $title, ?int $ignoreId = null): string
+    {
+        $base = Str::slug($title) ?: 'game';
+        $slug = $base;
+        $i = 2;
+
+        while (static::withoutGlobalScopes()
+            ->where('slug', $slug)
+            ->when($ignoreId, fn($q) => $q->where('id', '!=', $ignoreId))
+            ->exists()
+        ) {
+            $slug = $base . '-' . $i++;
+        }
+
+        return $slug;
     }
 
     public function tags(): BelongsToMany
@@ -46,7 +70,7 @@ class Game extends Model
     protected function thumbnail(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => $value ? asset('storage/'.$value) : null,
+            get: fn($value) => $value ? asset('storage/' . $value) : null,
         );
     }
 }
