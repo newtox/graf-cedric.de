@@ -82,6 +82,8 @@ return [
 
     'fallback_locale' => env('APP_FALLBACK_LOCALE', 'en'),
 
+    'total_commits' => (int) env('TOTAL_COMMITS', 0),
+
     'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
 
     /*

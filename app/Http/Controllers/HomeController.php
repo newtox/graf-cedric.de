@@ -11,7 +11,7 @@ class HomeController extends Controller
 {
     public function index(): View
     {
-        $commitCount = (int) env('TOTAL_COMMITS', 0);
+        $commitCount = (int) config('app.total_commits');
         $stats = [
             'total_games' => Game::count(),
             'total_tags' => Tag::count(),

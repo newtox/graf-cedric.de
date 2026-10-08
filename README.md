@@ -73,6 +73,19 @@ Authentication (login/logout only) is handled by a lightweight, self-maintained 
 - Manage users, roles, and passwords under `/admin/users` — there is no public registration
 - Manage companies (developers/publishers) and their logos under `/admin/companies`
 
+## Deployment
+
+On every push to `main`, the GitHub Action in `.github/workflows/docker.yml` builds a Docker image and publishes it as `ghcr.io/newtox/graf-cedric`. The commit count shown on the start page is baked into the image at build time.
+
+The server runs the image from `docker-compose.yml` as a Portainer stack:
+
+- Configuration comes from the stack's environment variables (Portainer provides them as `stack.env`).
+- Uploaded images live in `/docker_volumes/graf-cedric/public`, mounted to `storage/app/public`.
+- The app listens on `127.0.0.1:8091` behind Caddy (`reverse_proxy 127.0.0.1:8091`).
+- Migrations run automatically when the container starts.
+
+To update: push to `main`, wait for the action to finish, then use **Pull and redeploy** on the stack in Portainer.
+
 ## Contributing
 
 Want to improve Graf Cedric von Leuchtenberg's Website? Here's how:
