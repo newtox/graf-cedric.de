@@ -1,9 +1,4 @@
-@extends('layouts.retro')
-
-@section('title', __('menu.about'))
-@section('meta_description', __('about.tagline'))
-
-@section('content')
+<x-layouts.retro :title="__('menu.about')" :description="__('about.tagline')">
     <h2 class="font-pixel text-sm text-retro-accent2 mb-6">{{ __('about.title') }}</h2>
 
     <div class="pixel-border bg-retro-panel p-6 flex flex-col md:flex-row gap-6">
@@ -16,4 +11,4 @@
             {!! nl2br(e(__('about.content'))) !!}
         </div>
     </div>
-@endsection
+</x-layouts.retro>

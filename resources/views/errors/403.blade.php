@@ -1,1 +1,1 @@
-<x-error-layout code="403" title="{{ __('errors.error_403_title') }}" text="{{ __('errors.error_403_text') }}" />
+<x-layouts.error code="403" title="{{ __('errors.error_403_title') }}" text="{{ __('errors.error_403_text') }}" />

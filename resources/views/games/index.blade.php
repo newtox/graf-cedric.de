@@ -1,9 +1,4 @@
-@extends('layouts.retro')
-
-@section('title', __('menu.public_games'))
-@section('meta_description', __('games.meta_description'))
-
-@section('content')
+<x-layouts.retro :title="__('menu.public_games')" :description="__('games.meta_description')">
     <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
         <h2 class="font-pixel text-sm text-retro-accent2">{{ __('games.title') }}</h2>
 
@@ -42,4 +37,4 @@
     <div class="mt-6">
         {{ $games->links() }}
     </div>
-@endsection
+</x-layouts.retro>

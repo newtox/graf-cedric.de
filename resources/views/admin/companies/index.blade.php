@@ -1,6 +1,4 @@
-@extends('layouts.retro')
-
-@section('content')
+<x-layouts.retro>
     <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
         <h2 class="font-pixel text-sm text-retro-accent2">{{ __('companies.title') }}</h2>
 
@@ -116,4 +114,4 @@
     <div class="mt-4">
         {{ $companies->links() }}
     </div>
-@endsection
+</x-layouts.retro>

@@ -1,13 +1,4 @@
-@extends('layouts.retro')
-
-@section('title', $game->title)
-@section('meta_description', $game->title . ' — ' . $game->tags->pluck('name')->implode(', '))
-
-@if($game->thumbnail)
-    @section('og_image', $game->thumbnail)
-@endif
-
-@section('content')
+<x-layouts.retro :title="$game->title" :description="$game->title . ' — ' . $game->tags->pluck('name')->implode(', ')" :image="$game->thumbnail">
     <a href="{{ url()->previous() ?: route('games.index') }}" class="text-sm text-retro-muted hover:text-retro-accent2 transition font-mono">&larr; {{ __('games.title') }}</a>
 
     <div class="pixel-border bg-retro-panel mt-4 max-w-xl mx-auto overflow-hidden">
@@ -55,4 +46,4 @@
             </div>
         </div>
     </div>
-@endsection
+</x-layouts.retro>

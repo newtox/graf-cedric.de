@@ -1,6 +1,4 @@
-@extends('layouts.retro')
-
-@section('content')
+<x-layouts.retro>
     <h2 class="font-pixel text-sm text-retro-accent2 mb-6">{{ __('tags.edit') }}</h2>
 
     <form action="{{ route('admin.tags.update', $tag) }}" method="POST" class="pixel-border bg-retro-panel p-6 " novalidate>
@@ -35,4 +33,4 @@
             </button>
         </div>
     </form>
-@endsection
+</x-layouts.retro>

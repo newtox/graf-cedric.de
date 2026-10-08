@@ -1,9 +1,4 @@
-@extends('layouts.retro')
-
-@section('title', __('menu.dashboard'))
-@section('meta_description', __('about.tagline'))
-
-@section('content')
+<x-layouts.retro :title="__('menu.dashboard')" :description="__('about.tagline')">
     <h2 class="font-pixel text-sm text-retro-accent2 mb-6">{{ __('home.dashboard') }}</h2>
 
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
@@ -66,4 +61,4 @@
             </tbody>
         </table>
     </div>
-@endsection
+</x-layouts.retro>

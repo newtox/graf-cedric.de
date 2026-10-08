@@ -1,28 +1,36 @@
+@props(['title' => null, 'description' => null, 'image' => null, 'noindex' => false])
+
+@php
+    $title ??= __('menu.dashboard');
+    $description ??= __('about.tagline');
+    $image = $image ?: asset('storage/images/Profile.png');
+@endphp
+
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>@yield('title', __('menu.dashboard')) &mdash; Graf Cedric von Leuchtenberg</title>
-    <meta name="description" content="@yield('meta_description', __('about.tagline'))">
+    <title>{{ $title }} &mdash; Graf Cedric von Leuchtenberg</title>
+    <meta name="description" content="{{ $description }}">
 
     <meta property="og:type" content="website">
-    <meta property="og:title" content="@yield('title', __('menu.dashboard')) &mdash; Graf Cedric">
-    <meta property="og:description" content="@yield('meta_description', __('about.tagline'))">
-    <meta property="og:image" content="@yield('og_image', asset('storage/images/Profile.png'))">
+    <meta property="og:title" content="{{ $title }} &mdash; Graf Cedric">
+    <meta property="og:description" content="{{ $description }}">
+    <meta property="og:image" content="{{ $image }}">
     <meta property="og:url" content="{{ url()->current() }}">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="@yield('title', __('menu.dashboard')) &mdash; Graf Cedric">
-    <meta name="twitter:description" content="@yield('meta_description', __('about.tagline'))">
-    <meta name="twitter:image" content="@yield('og_image', asset('storage/images/Profile.png'))">
+    <meta name="twitter:title" content="{{ $title }} &mdash; Graf Cedric">
+    <meta name="twitter:description" content="{{ $description }}">
+    <meta name="twitter:image" content="{{ $image }}">
 
     <link rel="icon" href="{{ asset('storage/images/Profile.png') }}">
 
-    @auth
+    @if ($noindex || auth()->check())
         <meta name="robots" content="noindex, nofollow">
-    @endauth
+    @endif
 
     @stack('head')
 
@@ -133,7 +141,7 @@
             </aside>
 
             <main class="flex-1 min-w-0 bg-retro-panelLight/20 p-3 sm:p-6">
-                @yield('content')
+                {{ $slot }}
             </main>
         </div>
 

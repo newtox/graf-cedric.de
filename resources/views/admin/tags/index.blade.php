@@ -1,6 +1,4 @@
-@extends('layouts.retro')
-
-@section('content')
+<x-layouts.retro>
     <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
         <h2 class="font-pixel text-sm text-retro-accent2">{{ __('tags.title') }}</h2>
         @can('create tags')
@@ -98,4 +96,4 @@
     <div class="mt-4">
         {{ $tags->links() }}
     </div>
-@endsection
+</x-layouts.retro>
