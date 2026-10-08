@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ $code }} &mdash; Graf Cedric</title>
+    <title>{{ $code }} &mdash; Graf Cedric von Leuchtenberg</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-retro-bg text-retro-text min-h-screen">

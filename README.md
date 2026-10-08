@@ -75,7 +75,7 @@ Authentication (login/logout only) is handled by a lightweight, self-maintained 
 
 ## Contributing
 
-Want to improve Graf Cedric's Website? Here's how:
+Want to improve Graf Cedric von Leuchtenberg's Website? Here's how:
 
 1. **Fork** the repository
 2. **Create** a feature branch: `git checkout -b feature/your-feature`
